@@ -1,38 +1,71 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Portfolio – Chester "Surudoi" Andaya
 
-## Getting Started
+This is a [Next.js](https://nextjs.org/) portfolio website built with TypeScript and Tailwind CSS, showcasing my work, skills, and projects in Machine Learning and Computer Science.
 
-First, run the development server:
+---
+
+## 🚀 Getting Started
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to view your site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## 🛠️ Tech Stack
 
-## Learn More
+- **Framework:** [Next.js](https://nextjs.org/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Animation:** [Framer Motion](https://www.framer.com/motion/)
+- **TypeScript** for type safety
+- **Optimized Fonts:** [`next/font`](https://nextjs.org/docs/basic-features/font-optimization)
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📁 Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- `src/components/` – Reusable UI components
+- `src/sections/` – Page sections (e.g., Hero, Projects)
+- `public/assets/` – Images and icons
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## ✏️ Editing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-"# Newportfolio" 
-"# Newportfolio" 
+Start editing by modifying files in `src/sections/` or `src/components/`. Changes are reflected automatically.
+
+---
+
+## 📚 Learn More
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Tailwind CSS Docs](https://tailwindcss.com/docs)
+- [Framer Motion Docs](https://www.framer.com/motion/)
+
+---
+
+## 🚢 Deploy
+
+Deploy easily on [Vercel](https://vercel.com/) (recommended for Next.js):
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)
+
+See [Next.js deployment docs](https://nextjs.org/docs/deployment) for more options.
+
+---
+
+## 👤 About
+
+Crafted by Chester "Surudoi" Andaya – I see patterns others miss.
+
+---
