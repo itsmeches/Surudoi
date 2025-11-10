@@ -5,7 +5,7 @@ export const Header = () => {
   const [activeSection, setActiveSection] = useState("home");
 
   const handleScroll = () => {
-    const sections = ["home", "projects", "about", "contacts"];
+    const sections = ["home","about", "projects", "contacts"];
     const scrollY = window.scrollY;
     const header = document.querySelector("nav");
     const headerOffset = header?.clientHeight || 80;
@@ -60,8 +60,8 @@ export const Header = () => {
       <nav className="flex gap-1 p-2 border border-white/15 rounded-full bg-white/10 backdrop-blur">
         {[
           { id: "home", label: "Home" },
-          { id: "projects", label: "Projects" },
           { id: "about", label: "About" },
+          { id: "projects", label: "Projects" },
           { id: "contacts", label: "Contacts" },
         ].map((link) => (
           <a

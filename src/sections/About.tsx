@@ -1,24 +1,21 @@
-'use client';
+"use client";
 import { SectionHeader } from "@/components/SectionHeader";
-import { Card } from '@/components/Card';
-import { TechIcon } from '@/components/TechIcon';
+import { Card } from "@/components/Card";
 import { ToolboxItems } from "@/components/ToolboxItems";
-import StarIcon from "@/assets/icons/star.svg";
-import bookImage from '@/assets/images/book-cover.png';
+import bookImage from "@/assets/images/book-cover.png";
 import Image from "next/image";
-import JavascriptIcon from '@/assets/icons/square-js.svg';
-import HTMLIcon from '@/assets/icons/html5.svg';
-import CSSIcon from '@/assets/icons/css3.svg';
-import ReactIcon from '@/assets/icons/react.svg';
-import ChromeIcon from '@/assets/icons/chrome.svg';
-import GithubIcon from '@/assets/icons/github.svg';
+import JavascriptIcon from "@/assets/icons/square-js.svg";
+import HTMLIcon from "@/assets/icons/html5.svg";
+import CSSIcon from "@/assets/icons/css3.svg";
+import ReactIcon from "@/assets/icons/react.svg";
+import ChromeIcon from "@/assets/icons/chrome.svg";
+import GithubIcon from "@/assets/icons/github.svg";
 import mapImage from "@/assets/images/map.png";
-import mapemoji from '@/assets/images/mapmoji.png';
-import { title } from "process";
+import mapemoji from "@/assets/images/mapmoji.png";
+import CorporateProf from "@/assets/images/CorpoProf.png";
 import { CardHeader } from "@/components/CardHeader";
-import { motion } from 'framer-motion';
-import React, { useRef } from 'react'; 
-
+import { motion } from "framer-motion";
+import React, { useRef } from "react";
 
 const toolboxItems = [
   {
@@ -103,8 +100,41 @@ export const AboutSection = () => {
     <div className="container">
     <SectionHeader eyebrow="About Me" title = "A glimpse Into my World" description = "Learn more about who I am, What I do, and what inspires me"
     />
-    <div className="mt-20 flex flex-col gap-8 ">
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-5 lg:grid-cols-3">
+     <div className="mt-20 flex flex-col gap-8">
+          {/* FIRST ROW */}
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {/* My Journey */}
+        <Card className="min-h-[320px] md:col-span-3 lg:col-span-2 flex flex-col justify-between">
+        <CardHeader
+          title="My Journey"
+          description="From childhood curiosity to coding with sharp focus."
+          className="text-center whitespace-normal lg:whitespace-nowrap"
+        />
+
+        <p className="text-gray-300 text-sm leading-relaxed px-4 pb-4 text-justify">
+          Since childhood, I’ve been fascinated by technology and problem-solving. In Grade 8, I started 
+          programming in C, creating simple <em>Hello World</em> programs and basic games that sparked 
+          my curiosity for development.  
+          <br /><br />
+          Later, I became a streamer under the name 
+          <span className="text-emerald-300 font-semibold">“Surudoi”</span>, meaning <em>sharp</em> 
+          and <em>focused</em> — traits that define quick thinking and precision. Today, I channel that 
+          mindset into coding, staying analytical, curious, and driven to craft efficient and thoughtful 
+          solutions in Computer Science.
+        </p>
+      </Card>
+
+
+
+
+        <Card className="h-[370px] md:col-span-3 lg:col-span-1 p-0 overflow-hidden">
+        <Image 
+          src={CorporateProf} 
+          alt="Corporate Profile" 
+          className="w-full h-full object-cover"
+        />
+      </Card>
+      
       <Card className="h-[320px] md:col-span-2 lg:col-span-1">
         <CardHeader 
         title="My Reads" 
@@ -125,6 +155,7 @@ export const AboutSection = () => {
         itemsWrapperClassName="animate-move-right [animation-duration:15s]"
         />
       </Card>
+
       </div>
       <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
       <Card className="h-[320px] flex flex-col md:col-span-3 lg:col-span-3">
