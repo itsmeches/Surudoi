@@ -16,15 +16,16 @@ export const SurudoiCursor: React.FC<SurudoiCursorProps> = ({
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  const smoothX = useSpring(x, { stiffness: 600, damping: 40, mass: 0.7 });
-  const smoothY = useSpring(y, { stiffness: 600, damping: 40, mass: 0.7 });
+  // Smoother motion springs
+  const smoothX = useSpring(x, { stiffness: 500, damping: 50, mass: 0.8 });
+  const smoothY = useSpring(y, { stiffness: 500, damping: 50, mass: 0.8 });
 
-  const dotX = useSpring(x, { stiffness: 200, damping: 20, mass: 0.2 });
-  const dotY = useSpring(y, { stiffness: 200, damping: 20, mass: 0.2 });
+  const dotX = useSpring(x, { stiffness: 180, damping: 25, mass: 0.25 });
+  const dotY = useSpring(y, { stiffness: 180, damping: 25, mass: 0.25 });
 
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const [angle, setAngle] = useState(0); // Track cursor direction
+  const [angle, setAngle] = useState(0);
 
   const hoverElementsRef = useRef<HTMLElement[]>([]);
 
@@ -47,11 +48,11 @@ export const SurudoiCursor: React.FC<SurudoiCursorProps> = ({
       const mouseY = e.clientY;
       setIsVisible(true);
 
-      // Compute subtle direction shift
+      // 🌿 Smoothed directional motion
       const dx = mouseX - lastX;
       const dy = mouseY - lastY;
       const newAngle = Math.atan2(dy, dx) * (180 / Math.PI);
-      setAngle((prev) => prev + (newAngle - prev) * 0.08); // dampened change
+      setAngle((prev) => prev + (newAngle - prev) * 0.04); // smoother interpolation
       lastX = mouseX;
       lastY = mouseY;
 
@@ -102,47 +103,37 @@ export const SurudoiCursor: React.FC<SurudoiCursorProps> = ({
         animate={{
           scale: isHovering ? 2.2 : 1,
           opacity: isHovering ? 0.9 : 1,
-          rotate: angle / 15, // reduced rotation
+          rotate: angle / 20, // smoother + more subtle
           filter: isHovering
-            ? "drop-shadow(0 0 12px rgba(16,185,129,0.25))"
+            ? "drop-shadow(0 0 10px rgba(16,185,129,0.25))"
             : "none",
         }}
         transition={{ type: "spring", stiffness: 400, damping: 35 }}
       >
         <div
-          className={`w-8 h-8 rounded-full border border-emerald-400/50 backdrop-blur-[5px]
-          bg-white/5 shadow-[0_0_20px_rgba(16,185,129,0.1)]
+          className={`w-8 h-8 rounded-full border border-emerald-400/40 backdrop-blur-[5px]
+          bg-white/5 shadow-[0_0_18px_rgba(16,185,129,0.1)]
           relative flex items-center justify-center overflow-hidden`}
         >
-          {/* Subtle Glass Glow */}
+          {/* Directional glass glow only */}
           <motion.div
             className="absolute inset-0 rounded-full"
             style={{
               background: `radial-gradient(circle at ${
-                50 + Math.sin(angle / 40) * 8
-              }% ${50 - Math.cos(angle / 40) * 8}%, 
-              rgba(255,255,255,0.15) 0%, 
-              rgba(255,255,255,0.03) 45%, 
+                50 + Math.sin(angle / 50) * 8
+              }% ${50 - Math.cos(angle / 50) * 8}%,
+              rgba(255,255,255,0.18) 0%,
+              rgba(255,255,255,0.05) 40%,
               rgba(255,255,255,0) 80%)`,
               mixBlendMode: "overlay",
             }}
           />
 
-          {/* Gentle Moving Shimmer */}
-          <motion.div
-            className="absolute inset-0 rounded-full opacity-40 animate-shimmer"
-            style={{
-              rotate: angle / 8,
-              background:
-                "linear-gradient(130deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 60%)",
-            }}
-          />
-
           {isHovering && (
             <motion.span
-              initial={{ opacity: 0, y: 5 }}
+              initial={{ opacity: 0, y: 4 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 5 }}
+              exit={{ opacity: 0, y: 4 }}
               className="absolute -top-6 text-[11px] font-medium text-emerald-400 tracking-wide"
             >
               {hoverText}
@@ -157,11 +148,11 @@ export const SurudoiCursor: React.FC<SurudoiCursorProps> = ({
         style={{ x: dotX, y: dotY }}
         animate={{
           opacity: isHovering ? 0.25 : 0.4,
-          scale: isHovering ? 1.3 : 1,
+          scale: isHovering ? 1.2 : 1,
         }}
         transition={{ type: "spring", stiffness: 150, damping: 20 }}
       >
-        <div className="w-2 h-2 rounded-full bg-emerald-400/30 animate-pulse-slow" />
+        <div className="w-2 h-2 rounded-full bg-emerald-400/25 animate-pulse-slow" />
       </motion.div>
 
       <style jsx global>{`
@@ -169,16 +160,8 @@ export const SurudoiCursor: React.FC<SurudoiCursorProps> = ({
           0%, 100% { transform: scale(1); opacity: 0.35; }
           50% { transform: scale(1.3); opacity: 0.1; }
         }
-        @keyframes shimmer {
-          0% { transform: translateX(-100%) rotate(25deg); }
-          100% { transform: translateX(200%) rotate(25deg); }
-        }
         .animate-pulse-slow {
           animation: pulse-slow 3s ease-in-out infinite;
-        }
-        .animate-shimmer {
-          animation: shimmer 4s ease-in-out infinite;
-          mix-blend-mode: overlay;
         }
       `}</style>
     </>
