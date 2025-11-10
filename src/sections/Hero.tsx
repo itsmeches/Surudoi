@@ -2,6 +2,7 @@
 import me from "@/assets/images/me.png";
 import Image from "next/image";
 import ArrowDown from "@/assets/icons/arrow-down.svg";
+import Download from "@/assets/icons/download.svg";
 import grainImage from "@/assets/images/grain.jpg";
 import StarIcon from "@/assets/icons/star.svg";
 import SparkleIcon from "@/assets/icons/Sparkle.svg";
@@ -74,6 +75,8 @@ export const HeroSection = () => {
               />
               <div className="absolute -inset-2 rounded-full bg-gradient-to-r from-emerald-400/20 to-emerald-300/10 blur-lg opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="absolute inset-0 rounded-full border-2 border-emerald-400/30 animate-ping-slow" />
+              {/* Glass highlight */}
+              <div className="absolute top-2 left-2 w-10 h-10 rounded-full bg-white/20 blur-md pointer-events-none" />
             </div>
           </motion.div>
 
@@ -81,7 +84,7 @@ export const HeroSection = () => {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="mt-6 inline-flex items-center gap-2.5 border border-emerald-400/20 bg-emerald-950/30 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg"
+            className="mt-6 inline-flex items-center gap-2.5 border border-emerald-400/20 bg-emerald-950/30 backdrop-blur-md px-4 py-2 rounded-full shadow-lg"
           >
             <div className="relative flex items-center justify-center">
               <div className="size-2 rounded-full bg-emerald-400 animate-pulse" />
@@ -100,31 +103,43 @@ export const HeroSection = () => {
             transition={{ delay: 0.4 }}
           >
             Hi, I’m{" "}
-            <span className="text-emerald-400 font-bold">
+            <span className="text-emerald-400 font-bold relative">
               Chester{" "}
               <span
                 className="relative group cursor-pointer hover:text-emerald-300 transition-colors"
                 onMouseEnter={() => setShowDefinition(true)}
                 onMouseLeave={() => setShowDefinition(false)}
               >
-                “Surudoi”
+                {/* Animated underline for "Surudoi" */}
+                <span className="relative z-10">
+                  “Surudoi”
+                  <motion.span
+                    layoutId="surudoi-underline"
+                    className="absolute left-0 right-0 -bottom-1 h-1 rounded-full bg-gradient-to-r from-emerald-400/60 to-emerald-300/40"
+                    initial={{ opacity: 0, scaleX: 0.7 }}
+                    animate={{
+                      opacity: showDefinition ? 1 : 0.7,
+                      scaleX: showDefinition ? 1 : 0.7,
+                    }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </span>
                 {showDefinition && (
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="absolute left-1/2 -translate-x-1/2 bottom-full mb-3 bg-gray-800/90 text-white text-sm px-4 py-2 rounded-lg shadow-lg w-64"
+                    className="absolute left-1/2 -translate-x-1/2 bottom-full mb-3 bg-gradient-to-br from-gray-800/90 via-emerald-900/80 to-gray-900/90 text-white text-sm px-4 py-2 rounded-lg shadow-xl backdrop-blur-md border border-emerald-400/20 w-72"
                   >
                     <p className="text-emerald-300 font-semibold mb-1">
                       “Surudoi” (鋭い)
                     </p>
                     <p className="text-white/80 mb-2">
-                      Japanese for “sharp” or “keen” — a mindset of awareness and
-                      clarity.
+                      Japanese for “sharp” or “keen” a mindset of awareness and clarity.
                     </p>
                     <p className="italic text-emerald-300/80">
                       “I see patterns others miss.”
                     </p>
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 w-3 h-3 bg-gray-800/90 rotate-45"></div>
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 w-3 h-3 bg-emerald-900/80 rotate-45 border border-emerald-400/20"></div>
                   </motion.div>
                 )}
               </span>{" "}
@@ -146,7 +161,7 @@ export const HeroSection = () => {
 
           {/* === 4. Description === */}
           <motion.p
-            className="mt-6 max-w-2xl text-white/60 md:text-lg leading-relaxed"
+            className="mt-6 max-w-2xl text-white/70 md:text-lg leading-relaxed"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
@@ -155,8 +170,7 @@ export const HeroSection = () => {
             <span className="text-emerald-400/90 font-semibold">
               Machine Learning
             </span>
-            . I build intelligent solutions with precision, persistence, and an
-            analytical eye for detail.
+            . I build intelligent solutions with precision, persistence, and an analytical eye for detail.
           </motion.p>
 
           {/* === 5. CTA Buttons === */}
@@ -168,7 +182,7 @@ export const HeroSection = () => {
           >
             <button
               onClick={() => scrollToSection("projects")}
-              className="group inline-flex items-center gap-2 border border-white/15 px-6 h-12 rounded-xl hover:bg-white/10 hover:border-white/30 transition-all duration-300 hover:scale-105"
+              className="group inline-flex items-center gap-2 border border-white/15 px-6 h-12 rounded-xl bg-white/5 backdrop-blur-md hover:bg-white/10 hover:border-white/30 transition-all duration-300 hover:scale-105 shadow-lg"
             >
               <span className="font-semibold">View My Work</span>
               <ArrowDown className="size-4 group-hover:translate-y-1 transition-transform" />
@@ -176,10 +190,10 @@ export const HeroSection = () => {
 
             <button
               onClick={() => scrollToSection("contact")}
-              className="group inline-flex items-center gap-2 border border-emerald-400 bg-emerald-400 text-gray-900 h-12 px-6 rounded-xl hover:bg-emerald-300 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all duration-300 hover:scale-105 font-semibold"
+              className="group inline-flex items-center gap-2 border border-emerald-400 bg-emerald-400 text-gray-900 h-12 px-6 rounded-xl hover:bg-emerald-300 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all duration-300 hover:scale-105 font-semibold shadow-lg"
             >
-              <span className="text-lg">📄</span>
-              <span>Download Resume</span>
+              <span>Download CV</span>
+              <Download className="size-4 group-hover:translate-y-1 transition-transform" />
             </button>
           </motion.div>
 
