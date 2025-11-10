@@ -24,6 +24,8 @@ export const SurudoiCursor: React.FC<SurudoiCursorProps> = ({
 
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [angle, setAngle] = useState(0); // Track cursor direction
+
   const hoverElementsRef = useRef<HTMLElement[]>([]);
 
   const isTouchDevice =
@@ -33,15 +35,25 @@ export const SurudoiCursor: React.FC<SurudoiCursorProps> = ({
   useEffect(() => {
     if (isTouchDevice) return;
 
-    // Cache hoverable elements once
     hoverElementsRef.current = Array.from(
-      document.querySelectorAll("button, a, [role='button']")
+      document.querySelectorAll("button, a, [role='button'], [data-hoverable]")
     ) as HTMLElement[];
+
+    let lastX = 0;
+    let lastY = 0;
 
     const updateMouse = (e: MouseEvent) => {
       const mouseX = e.clientX;
       const mouseY = e.clientY;
       setIsVisible(true);
+
+      // Compute subtle direction shift
+      const dx = mouseX - lastX;
+      const dy = mouseY - lastY;
+      const newAngle = Math.atan2(dy, dx) * (180 / Math.PI);
+      setAngle((prev) => prev + (newAngle - prev) * 0.08); // dampened change
+      lastX = mouseX;
+      lastY = mouseY;
 
       let magneticOffset = { x: 0, y: 0 };
       let hovering = false;
@@ -51,15 +63,15 @@ export const SurudoiCursor: React.FC<SurudoiCursorProps> = ({
         const elCenterX = rect.left + rect.width / 2;
         const elCenterY = rect.top + rect.height / 2;
 
-        const dx = elCenterX - mouseX;
-        const dy = elCenterY - mouseY;
-        const distance = Math.sqrt(dx * dx + dy * dy);
+        const distX = elCenterX - mouseX;
+        const distY = elCenterY - mouseY;
+        const distance = Math.sqrt(distX * distX + distY * distY);
 
         if (distance < magneticDistance) {
           hovering = true;
           const strength = (1 - distance / magneticDistance) * magneticStrength;
-          magneticOffset.x += dx * strength;
-          magneticOffset.y += dy * strength;
+          magneticOffset.x += distX * strength;
+          magneticOffset.y += distY * strength;
         }
       }
 
@@ -83,23 +95,55 @@ export const SurudoiCursor: React.FC<SurudoiCursorProps> = ({
 
   return (
     <>
-      {/* Main Cursor */}
+      {/* === Main Glass Cursor === */}
       <motion.div
         className="fixed top-0 left-0 pointer-events-none z-[9999]"
         style={{ x: smoothX, y: smoothY }}
         animate={{
           scale: isHovering ? 2.2 : 1,
           opacity: isHovering ? 0.9 : 1,
+          rotate: angle / 15, // reduced rotation
+          filter: isHovering
+            ? "drop-shadow(0 0 12px rgba(16,185,129,0.25))"
+            : "none",
         }}
-        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+        transition={{ type: "spring", stiffness: 400, damping: 35 }}
       >
-        <div className="w-8 h-8 rounded-full border-2 border-emerald-400 bg-white/5 shadow-lg flex items-center justify-center transition-all duration-200">
+        <div
+          className={`w-8 h-8 rounded-full border border-emerald-400/50 backdrop-blur-[5px]
+          bg-white/5 shadow-[0_0_20px_rgba(16,185,129,0.1)]
+          relative flex items-center justify-center overflow-hidden`}
+        >
+          {/* Subtle Glass Glow */}
+          <motion.div
+            className="absolute inset-0 rounded-full"
+            style={{
+              background: `radial-gradient(circle at ${
+                50 + Math.sin(angle / 40) * 8
+              }% ${50 - Math.cos(angle / 40) * 8}%, 
+              rgba(255,255,255,0.15) 0%, 
+              rgba(255,255,255,0.03) 45%, 
+              rgba(255,255,255,0) 80%)`,
+              mixBlendMode: "overlay",
+            }}
+          />
+
+          {/* Gentle Moving Shimmer */}
+          <motion.div
+            className="absolute inset-0 rounded-full opacity-40 animate-shimmer"
+            style={{
+              rotate: angle / 8,
+              background:
+                "linear-gradient(130deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 60%)",
+            }}
+          />
+
           {isHovering && (
             <motion.span
               initial={{ opacity: 0, y: 5 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 5 }}
-              className="absolute -top-6 text-xs font-semibold text-emerald-400 whitespace-nowrap"
+              className="absolute -top-6 text-[11px] font-medium text-emerald-400 tracking-wide"
             >
               {hoverText}
             </motion.span>
@@ -107,26 +151,35 @@ export const SurudoiCursor: React.FC<SurudoiCursorProps> = ({
         </div>
       </motion.div>
 
-      {/* Trailing Dot with Pulse */}
+      {/* === Trailing Dot === */}
       <motion.div
         className="fixed top-0 left-0 pointer-events-none z-[9998]"
         style={{ x: dotX, y: dotY }}
         animate={{
-          opacity: isHovering ? 0.3 : 0.6,
-          scale: isHovering ? 1.5 : 1,
+          opacity: isHovering ? 0.25 : 0.4,
+          scale: isHovering ? 1.3 : 1,
         }}
-        transition={{ type: "spring", stiffness: 150, damping: 15 }}
+        transition={{ type: "spring", stiffness: 150, damping: 20 }}
       >
-        <div className="w-2 h-2 rounded-full bg-emerald-400/40 animate-pulse-slow" />
+        <div className="w-2 h-2 rounded-full bg-emerald-400/30 animate-pulse-slow" />
       </motion.div>
 
-      {/* Global Pulse Keyframes */}
       <style jsx global>{`
         @keyframes pulse-slow {
-          0%, 100% { transform: scale(1); opacity: 0.4; }
-          50% { transform: scale(1.4); opacity: 0.1; }
+          0%, 100% { transform: scale(1); opacity: 0.35; }
+          50% { transform: scale(1.3); opacity: 0.1; }
         }
-        .animate-pulse-slow { animation: pulse-slow 2.5s ease-in-out infinite; }
+        @keyframes shimmer {
+          0% { transform: translateX(-100%) rotate(25deg); }
+          100% { transform: translateX(200%) rotate(25deg); }
+        }
+        .animate-pulse-slow {
+          animation: pulse-slow 3s ease-in-out infinite;
+        }
+        .animate-shimmer {
+          animation: shimmer 4s ease-in-out infinite;
+          mix-blend-mode: overlay;
+        }
       `}</style>
     </>
   );
