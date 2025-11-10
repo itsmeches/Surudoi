@@ -128,9 +128,9 @@ export const AboutSection = () => {
       );
     })}
   </div>
-
+{/* comment muna for the mean time kasi ang panget */}
   {/* Navigation Arrows */}
-  <button
+  {/* <button
     className="absolute left-2 top-1/2 transform -translate-y-1/2 text-emerald-300 text-2xl font-bold z-10"
     onClick={() =>
       setCurrentIndex((prev) => (prev - 1 + journeyImages.length) % journeyImages.length)
@@ -143,7 +143,7 @@ export const AboutSection = () => {
     onClick={() => setCurrentIndex((prev) => (prev + 1) % journeyImages.length)}
   >
     ›
-  </button>
+  </button> */}
 </Card>
 
 
