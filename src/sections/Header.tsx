@@ -19,7 +19,7 @@ export const Header = () => {
     });
   };
 
-  const handleNavClick = (sectionId) => {
+  const handleNavClick = (sectionId: string) => {
     const sectionElement = document.getElementById(sectionId);
     if (sectionElement) {
       sectionElement.scrollIntoView({ behavior: 'smooth' });
