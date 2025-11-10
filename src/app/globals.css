@@ -20,3 +20,17 @@
     }
 }
 
+/* Surudoi Custom Cursor */
+* {
+  cursor: none !important;
+}
+
+a, 
+button, 
+[role="button"],
+input,
+textarea,
+select,
+label {
+  cursor: none !important;
+}
