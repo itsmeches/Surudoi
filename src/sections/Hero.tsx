@@ -21,6 +21,9 @@ export const HeroSection = () => {
 
   return (
     <div id="home" className="py-32 md:py-48 lg:py-60 relative z-0 overflow-x-clip">
+      {/* Top Gradient Glow - Behind Orbits, Fully Responsive */}
+      <div className="absolute h-[500px] w-full left-0 right-0 top-0 bg-emerald-300/15 [mask-image:radial-gradient(50%_80%_at_top_center,black,transparent)] -z-20 pointer-events-none"></div>
+      
       {/* Background grain + orbiting elements */}
       <div className='absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_75%,transparent)]'>
         <div 
