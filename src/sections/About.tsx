@@ -53,7 +53,7 @@ export const AboutSection = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % journeyImages.length);
-    }, 4000);
+    }, 8000);
     return () => clearInterval(timer);
   }, []);
 
