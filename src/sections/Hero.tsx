@@ -2,6 +2,7 @@
 import me from '@/assets/images/me.png';
 import Image from 'next/image';
 import ArrowDown from '@/assets/icons/arrow-down.svg';
+import Download from '@/assets/icons/download.svg';
 import grainImage from "@/assets/images/grain.jpg";
 import StarIcon from "@/assets/icons/star.svg";
 import SparkleIcon from "@/assets/icons/Sparkle.svg";
@@ -234,8 +235,8 @@ export const HeroSection = () => {
               onClick={() => scrollToSection("contact")}
               aria-label="Download resume"
             >
-              <span className="text-lg">📄</span>
-              <span>Download Resume</span>
+              <span className="font-semibold">Download CV</span>
+              <Download className="size-4 group-hover:translate-y-1 transition-transform" />
             </button>
           </motion.div>
 

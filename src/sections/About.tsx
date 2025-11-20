@@ -82,7 +82,7 @@ export const AboutSection = () => {
                 my curiosity for development.
                 <br />
                 <br />
-                Later, I became a game streamer under the name{" "}
+                Later, I became an fps game streamer under the name{" "}
                 <span className="text-emerald-300 font-semibold">"Surudoi"</span> (鋭い) — meaning{" "}
                 <em>sharp</em> and <em>focused</em>. Eventually, I shifted to creating{" "}
                 <span className="text-emerald-300 font-semibold">coding tutorials</span>, turning my 
@@ -160,11 +160,11 @@ export const AboutSection = () => {
                           fill
                           className={`object-cover rounded-2xl shadow-2xl transition-all duration-700 ${
                             isActive 
-                              ? "border-2 border-emerald-400/40" 
-                              : "border border-gray-700/50"
+                              ? "" 
+                              : "opacity-70"
                           }`}
                           style={{
-                            filter: isActive ? "grayscale(0) brightness(1)" : "grayscale(0.3) brightness(0.7)",
+                            filter: isActive ? "grayscale(0) brightness(1)" : "grayscale(0.3) brightness(0.8)",
                           }}
                         />
 
