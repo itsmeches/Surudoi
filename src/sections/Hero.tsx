@@ -209,7 +209,7 @@ export const HeroSection = () => {
             A Computer Science student specializing in{" "}
             <span className="text-emerald-400/90 font-semibold">Machine Learning</span>.
             <br className="hidden md:block" />
-            I build intelligent solutions with precision, persistence, and a sharp eye for detail.
+          I build smart solutions with precision, persistence, and a sharp eye for detail.
           </motion.p>
 
           {/* CTA Buttons - Professional with personality */}
