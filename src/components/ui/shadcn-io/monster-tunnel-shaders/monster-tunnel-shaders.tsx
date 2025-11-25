@@ -106,7 +106,10 @@ const fragmentShader = `
       if (d < 0.001) ac += 0.1;
     }
 
-    vec3 col = hsl2rgb(vec3(12.0/360.0, 0.76, 0.61)) * 0.2 * vec3(ac) * u_intensity;
+    vec3 colorStart = vec3(0.431, 0.905, 0.718);
+    vec3 colorEnd = vec3(0.219, 0.741, 0.973);
+    vec3 col = mix(colorStart, colorEnd, vUv.y) * 0.2 * vec3(ac) * u_intensity;
+
     vec3 pn = ro + rd * t;
     float kn = 0.5;
     pn.z += -1.5 * iTime * u_speed * u_zoom;

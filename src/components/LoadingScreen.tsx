@@ -11,8 +11,8 @@ export default function LoadingScreen() {
 
   // Handle fade out and removal
   useEffect(() => {
-    const fadeTimeout = setTimeout(() => setFadeOut(true), 2500);
-    const removeTimeout = setTimeout(() => setVisible(false), 3000);
+    const fadeTimeout = setTimeout(() => setFadeOut(true), 2000); // fade starts at 2s
+    const removeTimeout = setTimeout(() => setVisible(false), 2500); // remove at 2.5s
     return () => {
       clearTimeout(fadeTimeout);
       clearTimeout(removeTimeout);
