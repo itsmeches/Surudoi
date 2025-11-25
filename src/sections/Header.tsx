@@ -1,11 +1,12 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 export const Header = () => {
   const [activeSection, setActiveSection] = useState("home");
 
   const handleScroll = () => {
-    const sections = ["home","about", "projects", "contacts"];
+    const sections = ["home", "about", "projects", "contacts"];
     const scrollY = window.scrollY;
     const header = document.querySelector("nav");
     const headerOffset = header?.clientHeight || 80;
@@ -56,7 +57,12 @@ export const Header = () => {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 right-0 mt-2 flex justify-center items-center z-20">
+    <motion.div
+      className="fixed top-0 left-0 right-0 mt-2 flex justify-center items-center z-20"
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 2.5 }} // delay syncs with Hero fade-in
+    >
       <nav className="flex gap-1 p-2 border border-white/15 rounded-full bg-white/10 backdrop-blur">
         {[
           { id: "home", label: "Home" },
@@ -77,6 +83,6 @@ export const Header = () => {
           </a>
         ))}
       </nav>
-    </div>
+    </motion.div>
   );
 };

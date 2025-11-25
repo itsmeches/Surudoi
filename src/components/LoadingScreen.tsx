@@ -23,7 +23,7 @@ export default function LoadingScreen() {
   useEffect(() => {
     let animationFrame: number;
     const animateZoom = () => {
-      setScale(prev => prev + 0.002); // adjust zoom speed here
+      setScale(prev => prev + 0.010); // adjust zoom speed here
       animationFrame = requestAnimationFrame(animateZoom);
     };
     animationFrame = requestAnimationFrame(animateZoom);
@@ -34,7 +34,7 @@ export default function LoadingScreen() {
 
   return (
     <div
-      className={`fixed inset-0 z-[9999] transition-opacity duration-500 ${
+      className={`fixed inset-0 z-[9999] transition-opacity duration-3500 ${
         fadeOut ? "opacity-0" : "opacity-100"
       }`}
     >
@@ -70,8 +70,11 @@ export default function LoadingScreen() {
             className="pointer-events-none absolute inset-0 h-full w-full select-none transition-opacity duration-500"
             style={{
               backgroundColor: "#111827", // match your shader background
-              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
               opacity: fadeOut ? 0 : 0.15,
+
+              // backgroundColor: "#ffffff",
+              // backgroundImage: "url('/textures/film-grain.png')",
+              // opacity: fadeOut ? 0 : 0.08, // lighter for white background
             }}
           />
         </>

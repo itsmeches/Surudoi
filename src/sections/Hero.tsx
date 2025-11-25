@@ -4,8 +4,8 @@ import Image from 'next/image';
 import ArrowDown from '@/assets/icons/arrow-down.svg';
 import Download from '@/assets/icons/download.svg';
 import grainImage from "@/assets/images/grain.jpg";
-import StarIcon from "@/assets/icons/star.svg";
-import SparkleIcon from "@/assets/icons/Sparkle.svg";
+import StarIcon from '@/assets/icons/star.svg';
+import SparkleIcon from '@/assets/icons/Sparkle.svg';
 import { HeroOrbit } from '@/components/heroOrbit';
 import React from 'react';
 import { motion } from 'framer-motion';
@@ -21,24 +21,28 @@ export const HeroSection = () => {
   };
 
   return (
-    <div id="home" className="py-32 md:py-48 lg:py-60 relative z-0 overflow-x-clip">
-      {/* Top Gradient Glow - Behind Orbits, Fully Responsive */}
+    // Fade-in wrapper after loading screen
+    <motion.div
+      id="home"
+      className="py-32 md:py-48 lg:py-60 relative z-0 overflow-x-clip"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 2.5, duration: 1 }} // fade in after 2.5s
+    >
+      {/* Top Gradient Glow */}
       <div className="absolute h-[500px] w-full left-0 right-0 top-0 bg-emerald-300/15 [mask-image:radial-gradient(50%_80%_at_top_center,black,transparent)] -z-20 pointer-events-none"></div>
-      
+
       {/* Background grain + orbiting elements */}
       <div className='absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_75%,transparent)]'>
-        <div 
-          className="absolute inset-0 -z-30 opacity-5"
-          style={{ backgroundImage: `url(${grainImage.src})` }}
-        ></div>
+        <div className="absolute inset-0 -z-30 opacity-5" style={{ backgroundImage: `url(${grainImage.src})` }}></div>
 
-        {/* Precision rings - representing focused thinking */}
+        {/* Precision rings */}
         <div className='size-[620px] hero-ring'></div>
         <div className='size-[820px] hero-ring'></div>
         <div className='size-[1020px] hero-ring'></div>
         <div className='size-[1220px] hero-ring'></div>
 
-        {/* Orbiting elements - Layer 1: Representing ideas and solutions */}
+        {/* Orbiting elements */}
         <HeroOrbit size={430} rotation={-14} shouldOrbit orbitDuration="30s" shouldSpin spinDuration="3s">
           <SparkleIcon className="size-8 text-emerald-300/20 animate-pulse-subtle" />
         </HeroOrbit>
@@ -60,8 +64,6 @@ export const HeroSection = () => {
         <HeroOrbit size={650} rotation={-5} shouldOrbit orbitDuration="42s">
           <div className="size-2 rounded-full bg-emerald-300/20 animate-twinkle" />
         </HeroOrbit>
-        
-        {/* Additional orbital elements for depth */}
         <HeroOrbit size={720} rotation={-72} shouldOrbit orbitDuration="50s" shouldSpin spinDuration="4s">
           <SparkleIcon className="size-6 text-emerald-300/15 animate-pulse-subtle" />
         </HeroOrbit>
@@ -91,32 +93,29 @@ export const HeroSection = () => {
 
       {/* Center content */}
       <div className="container flex flex-col items-center z-30 relative">
+        {/* Main motion wrapper synced with fade-in */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ delay: 3.5, duration: 0.8, ease: [0.22, 1, 0.36, 1] }} // starts after hero wrapper fade
           className="flex flex-col items-center text-center"
         >
-          {/* Profile Image - The Eye (Surudoi symbolism) */}
+          {/* Profile Image */}
           <motion.div 
             className="relative"
             initial={{ y: -30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ delay: 3.6, duration: 1, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="relative group">
-              {/* Main image */}
               <Image
                 src={me}
                 className="size-[120px] md:size-[140px] rounded-full border-2 border-emerald-400/40 shadow-[0_0_30px_rgba(16,185,129,0.15)] transition-all duration-500 group-hover:scale-105 group-hover:shadow-[0_0_40px_rgba(16,185,129,0.25)]"
                 alt="Chester 'Surudoi' Andaya"
                 priority
               />
-              {/* Outer glow ring */}
               <div className="absolute -inset-2 rounded-full bg-gradient-to-r from-emerald-400/20 to-emerald-300/10 blur-lg opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
-              {/* Pulsing ring - representing awareness */}
               <div className="absolute inset-0 rounded-full border-2 border-emerald-400/30 animate-ping-slow" />
-              {/* Sharp focus ring */}
               <div className="absolute -inset-1 rounded-full border border-emerald-400/20" />
             </div>
           </motion.div>
@@ -125,7 +124,7 @@ export const HeroSection = () => {
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
+            transition={{ delay: 3.7, duration: 0.6 }}
             className="mt-8 inline-flex items-center gap-2.5 border border-emerald-400/20 bg-emerald-950/30 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg"
           >
             <div className="relative flex items-center justify-center">
@@ -135,12 +134,12 @@ export const HeroSection = () => {
             <span className="text-sm text-emerald-300/90 font-medium">Open to opportunities</span>
           </motion.div>
 
-          {/* Main Headline - Clean and Professional */}
+          {/* Headline */}
           <motion.h1 
             className="mt-8 text-4xl md:text-5xl lg:text-6xl font-serif tracking-wide leading-tight relative"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
+            transition={{ delay: 3.8, duration: 0.8 }}
           >
             Hi, I'm{" "}
             <span className="text-emerald-400 font-bold">
@@ -158,7 +157,6 @@ export const HeroSection = () => {
                 "Surudoi"
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-300 group-hover:w-full transition-all duration-300" />
               
-              {/* Simple, Readable Tooltip */}
               {showDefinition && (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
@@ -168,30 +166,26 @@ export const HeroSection = () => {
                   className="absolute left-1/2 -translate-x-1/2 bottom-full mb-3 bg-gray-800/90 text-white text-sm px-4 py-2 rounded-lg shadow-lg w-64"
                   role="tooltip"
                 >
-                  <p className="text-emerald-300 font-semibold mb-1">
-                    "Surudoi" (鋭い)
-                  </p>
+                  <p className="text-emerald-300 font-semibold mb-1">"Surudoi" (鋭い)</p>
                   <p className="text-white/80 mb-2">
-                    A Japanese word meaning "sharp," "keen," or "perceptive."<br />
+                    A Japanese word meaning "sharp," "keen," or "perceptive.<br />
                     Reflects awareness and analytical clarity.
                   </p>
-                  <p className="italic text-emerald-300/80">
-                    "I see patterns others miss."
-                  </p>
+                  <p className="italic text-emerald-300/80">"I see patterns others miss."</p>
                   <div className="absolute top-full left-1/2 -translate-x-1/2 -translate-y-1 w-3 h-3 bg-gray-800/90 rotate-45"></div>
                 </motion.div>
               )}
-                          </span>{" "}
+              </span>{" "}
               Andaya
             </span>
           </motion.h1>
 
-          {/* Tagline - Sharp Mind. Focused Solutions. */}
+          {/* Tagline */}
           <motion.div
             className="mt-6 flex flex-col items-center gap-3"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
+            transition={{ delay: 3.9, duration: 0.8 }}
           >
             <p className="text-emerald-400/90 text-lg md:text-xl font-medium tracking-wide">
               Sharp mind. Focused solutions.
@@ -204,22 +198,20 @@ export const HeroSection = () => {
             className="mt-6 max-w-2xl text-white/60 md:text-lg leading-relaxed"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
+            transition={{ delay: 4.0, duration: 0.8 }}
           >
             A Computer Science student specializing in{" "}
-            <span className="text-emerald-400/90 font-semibold">Machine Learning</span>.
-            <br className="hidden md:block" />
-          I build smart solutions with precision, persistence, and a sharp eye for detail.
+            <span className="text-emerald-400/90 font-semibold">Machine Learning</span>.<br className="hidden md:block" />
+            I build smart solutions with precision, persistence, and a sharp eye for detail.
           </motion.p>
 
-          {/* CTA Buttons - Professional with personality */}
+          {/* CTA Buttons */}
           <motion.div 
             className="flex flex-col md:flex-row justify-center items-center mt-10 gap-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.6 }}
+            transition={{ delay: 4.1, duration: 0.6 }}
           >
-            {/* Primary CTA */}
             <button
               className="group inline-flex items-center gap-2 border border-white/15 px-6 h-12 rounded-xl hover:bg-white/10 hover:border-white/30 transition-all duration-300 hover:scale-105 active:scale-95"
               onClick={() => scrollToSection("projects")}
@@ -229,7 +221,6 @@ export const HeroSection = () => {
               <ArrowDown className="size-4 group-hover:translate-y-1 transition-transform" />
             </button>
 
-            {/* Secondary CTA */}
             <button
               className="group inline-flex items-center gap-2 border border-emerald-400 bg-emerald-400 text-gray-900 h-12 px-6 rounded-xl hover:bg-emerald-300 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all duration-300 hover:scale-105 active:scale-95 font-semibold"
               onClick={() => scrollToSection("contact")}
@@ -244,7 +235,7 @@ export const HeroSection = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.2, duration: 0.6 }}
+            transition={{ delay: 4.2, duration: 0.6 }}
             className="mt-16 hidden md:block"
           >
             <div className="flex flex-col items-center gap-2 text-white/40">
@@ -260,86 +251,21 @@ export const HeroSection = () => {
         </motion.div>
       </div>
 
-      {/* Enhanced Keyframe Animations */}
+      {/* Keyframe Animations */}
       <style jsx global>{`
         @keyframes ping-slow {
-          0%, 100% {
-            transform: scale(1);
-            opacity: 0.4;
-          }
-          50% {
-            transform: scale(1.08);
-            opacity: 0;
-          }
+          0%,100% { transform: scale(1); opacity:0.4; }
+          50% { transform: scale(1.08); opacity:0; }
         }
-
-        .animate-ping-slow {
-          animation: ping-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-
-        /* Glowing star effect */
-        @keyframes glow {
-          0%, 100% {
-            opacity: 0.8;
-            filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.6));
-          }
-          50% {
-            opacity: 1;
-            filter: drop-shadow(0 0 12px rgba(16, 185, 129, 0.8));
-          }
-        }
-
-        .animate-glow {
-          animation: glow 3s ease-in-out infinite;
-        }
-
-        /* Subtle pulse for sparkles */
-        @keyframes pulse-subtle {
-          0%, 100% {
-            opacity: 0.2;
-            transform: scale(1);
-          }
-          50% {
-            opacity: 0.4;
-            transform: scale(1.1);
-          }
-        }
-
-        .animate-pulse-subtle {
-          animation: pulse-subtle 4s ease-in-out infinite;
-        }
-
-        /* Twinkling effect for dots */
-        @keyframes twinkle {
-          0%, 100% {
-            opacity: 0.2;
-            transform: scale(1);
-          }
-          25% {
-            opacity: 0.6;
-            transform: scale(1.3);
-          }
-          50% {
-            opacity: 0.3;
-            transform: scale(1);
-          }
-          75% {
-            opacity: 0.8;
-            transform: scale(1.2);
-          }
-        }
-
-        .animate-twinkle {
-          animation: twinkle 5s ease-in-out infinite;
-        }
-
-        /* Smooth focus ring for accessibility */
-        *:focus-visible {
-          outline: 2px solid rgba(16, 185, 129, 0.5);
-          outline-offset: 4px;
-          border-radius: 0.5rem;
-        }
+        .animate-ping-slow { animation: ping-slow 3s cubic-bezier(0.4,0,0.6,1) infinite; }
+        @keyframes glow { 0%,100%{opacity:0.8;filter:drop-shadow(0 0 8px rgba(16,185,129,0.6));} 50%{opacity:1;filter:drop-shadow(0 0 12px rgba(16,185,129,0.8));} }
+        .animate-glow { animation:glow 3s ease-in-out infinite; }
+        @keyframes pulse-subtle { 0%,100%{opacity:0.2;transform:scale(1);} 50%{opacity:0.4;transform:scale(1.1);} }
+        .animate-pulse-subtle { animation:pulse-subtle 4s ease-in-out infinite; }
+        @keyframes twinkle { 0%,100%{opacity:0.2;transform:scale(1);} 25%{opacity:0.6;transform:scale(1.3);} 50%{opacity:0.3;transform:scale(1);} 75%{opacity:0.8;transform:scale(1.2);} }
+        .animate-twinkle { animation:twinkle 5s ease-in-out infinite; }
+        *:focus-visible { outline: 2px solid rgba(16,185,129,0.5); outline-offset: 4px; border-radius:0.5rem; }
       `}</style>
-    </div>
+    </motion.div>
   );
 };

@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useRef, useMemo } from "react";
+import React, { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 export interface MonsterTunnelShadersProps extends React.HTMLAttributes<HTMLDivElement> {
   speed?: number;
@@ -13,6 +14,7 @@ export interface MonsterTunnelShadersProps extends React.HTMLAttributes<HTMLDivE
   zoomSpeed?: number; // zoom effect
   onFirstFrame?: () => void; // callback to notify parent
 }
+
 
 // FORCE FULL SCREEN (Clip Space)
 const vertexShader = `
@@ -182,8 +184,22 @@ export const MonsterTunnelShaders = ({
   onFirstFrame,
   ...props
 }: MonsterTunnelShadersProps) => {
+  const [fadeIn, setFadeIn] = useState(false);
+
+  // trigger fade-in on mount
+  useEffect(() => {
+    const timer = setTimeout(() => setFadeIn(true), 100); // slight delay if needed
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className={cn("w-full h-full bg-black", className)} {...props}>
+    <motion.div
+      className={cn("w-full h-full bg-black", className)}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: fadeIn ? 1 : 0 }}
+      transition={{ duration: 1.5, ease: "easeOut" }}
+      {...props}
+    >
       <Canvas resize={{ scroll: false }}>
         <TunnelMesh
           speed={speed}
@@ -194,7 +210,7 @@ export const MonsterTunnelShaders = ({
           onFirstFrame={onFirstFrame}
         />
       </Canvas>
-    </div>
+    </motion.div>
   );
 };
 
