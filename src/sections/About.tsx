@@ -211,6 +211,37 @@ export const AboutSection = () => {
               </motion.div>
             </Card>
 
+            {/*2nd Row */}
+                  
+           <Card className="min-h-[320px] flex flex-col justify-between md:col-span-2 lg:col-span-1 ">
+              
+              
+            <CardHeader
+                title="Achievements"
+                description="Milestones that reflect my growth, dedication, and pursuit of excellence."
+                className="text-center whitespace-normal lg:whitespace-nowrap"
+                
+              />
+              
+            </Card>
+
+
+            <Card className="min-h-[320px] flex flex-col justify-between md:col-span-2 lg:col-span-2 ">
+              <CardHeader
+                title="Impact"
+                description="The ways I’ve made a difference and contributed to meaningful change."
+                className="text-center whitespace-normal lg:whitespace-nowrap"
+              />
+              
+            </Card>
+
+            
+
+
+
+
+            
+
             {/* Reads */}
             <Card className="h-[320px] md:col-span-2 lg:col-span-1">
               <CardHeader
