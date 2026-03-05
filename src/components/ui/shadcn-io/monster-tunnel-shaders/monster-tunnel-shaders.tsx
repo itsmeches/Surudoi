@@ -198,7 +198,6 @@ export const MonsterTunnelShaders = ({
       initial={{ opacity: 0 }}
       animate={{ opacity: fadeIn ? 1 : 0 }}
       transition={{ duration: 1.5, ease: "easeOut" }}
-      {...props}
     >
       <Canvas resize={{ scroll: false }}>
         <TunnelMesh
