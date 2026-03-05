@@ -141,7 +141,7 @@ export const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 3.8, duration: 0.8 }}
           >
-            Hi, I'm{" "}
+            Hi, I&apos;m{" "}
             <span className="text-emerald-400 font-bold">
               Chester{" "}
               <span
@@ -168,10 +168,10 @@ export const HeroSection = () => {
                 >
                   <p className="text-emerald-300 font-semibold mb-1">"Surudoi" (鋭い)</p>
                   <p className="text-white/80 mb-2">
-                    A Japanese word meaning "sharp," "keen," or "perceptive.<br />
+                    A Japanese word meaning &quot;sharp,&quot; &quot;keen,&quot; or &quot;perceptive.<br />
                     Reflects awareness and analytical clarity.
                   </p>
-                  <p className="italic text-emerald-300/80">"I see patterns others miss."</p>
+                  <p className="italic text-emerald-300/80">&quot;I see patterns others miss.&quot;</p>
                   <div className="absolute top-full left-1/2 -translate-x-1/2 -translate-y-1 w-3 h-3 bg-gray-800/90 rotate-45"></div>
                 </motion.div>
               )}

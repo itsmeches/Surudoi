@@ -77,7 +77,7 @@ export const AboutSection = () => {
                 className="text-center whitespace-normal lg:whitespace-nowrap"
               />
               <p className="text-gray-300 text-sm md:text-base leading-relaxed px-4 pb-4 text-justify">
-                Since childhood, I've been fascinated by technology and problem-solving. In Grade 8, I started 
+                Since childhood, I&apos;ve been fascinated by technology and problem-solving. In Grade 8, I started 
                 programming in C, creating simple <em>Hello World</em> programs and basic games that sparked 
                 my curiosity for development.
                 <br />
