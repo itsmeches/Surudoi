@@ -221,14 +221,15 @@ export const HeroSection = () => {
               <ArrowDown className="size-4 group-hover:translate-y-1 transition-transform" />
             </button>
 
-            <button
-              className="group inline-flex items-center gap-2 border border-emerald-400 bg-emerald-400 text-gray-900 h-12 px-6 rounded-xl hover:bg-emerald-300 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all duration-300 hover:scale-105 active:scale-95 font-semibold"
-              onClick={() => scrollToSection("contact")}
-              aria-label="Download resume"
-            >
-              <span className="font-semibold">Download CV</span>
-              <Download className="size-4 group-hover:translate-y-1 transition-transform" />
-            </button>
+            <a
+            href="/cv.pdf"
+            download="Chester-Andaya-CV.pdf"
+            className="group inline-flex items-center gap-2 border border-emerald-400 bg-emerald-400 text-gray-900 h-12 px-6 rounded-xl hover:bg-emerald-300 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all duration-300 hover:scale-105 active:scale-95 font-semibold"
+            aria-label="Download resume"
+          >
+            <span className="font-semibold">Download CV</span>
+            <Download className="size-4 group-hover:translate-y-1 transition-transform" />
+          </a>
           </motion.div>
 
           {/* Scroll Indicator */}
