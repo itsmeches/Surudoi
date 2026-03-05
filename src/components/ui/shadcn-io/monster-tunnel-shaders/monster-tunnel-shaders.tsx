@@ -131,7 +131,7 @@ const TunnelMesh = ({
   intensity,
   zoom,
   onFirstFrame,
-}: Required<Omit<MonsterTunnelShadersProps, "className">> & { zoom: number; onFirstFrame?: () => void }) => {
+}: Omit<MonsterTunnelShadersProps, "className"> & { zoom: number; onFirstFrame?: () => void }) => {
   const mesh = useRef<THREE.Mesh>(null);
   const shaderStarted = useRef(false);
 
