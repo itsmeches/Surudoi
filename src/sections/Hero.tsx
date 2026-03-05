@@ -166,7 +166,7 @@ export const HeroSection = () => {
                   className="absolute left-1/2 -translate-x-1/2 bottom-full mb-3 bg-gray-800/90 text-white text-sm px-4 py-2 rounded-lg shadow-lg w-64"
                   role="tooltip"
                 >
-                  <p className="text-emerald-300 font-semibold mb-1">"Surudoi" (鋭い)</p>
+                  <p className="text-emerald-300 font-semibold mb-1">&quot;Surudoi&quot; (鋭い)</p>
                   <p className="text-white/80 mb-2">
                     A Japanese word meaning &quot;sharp,&quot; &quot;keen,&quot; or &quot;perceptive.<br />
                     Reflects awareness and analytical clarity.

@@ -83,7 +83,7 @@ export const AboutSection = () => {
                 <br />
                 <br />
                 Later, I became an fps game streamer under the name{" "}
-                <span className="text-emerald-300 font-semibold">"Surudoi"</span> (鋭い) — meaning{" "}
+                <span className="text-emerald-300 font-semibold">&quot;Surudoi&quot;</span> (鋭い) — meaning{" "}
                 <em>sharp</em> and <em>focused</em>. Eventually, I shifted to creating{" "}
                 <span className="text-emerald-300 font-semibold">coding tutorials</span>, turning my 
                 forgetfulness into a strength by documenting what I learn while teaching others the daily 
