@@ -5,7 +5,7 @@ import ArrowDown from '@/assets/icons/arrow-down.svg';
 import Download from '@/assets/icons/download.svg';
 import grainImage from "@/assets/images/grain.jpg";
 import StarIcon from '@/assets/icons/star.svg';
-import SparkleIcon from '@/assets/icons/Sparkle.svg';
+import SparkleIcon from '@/assets/icons/sparkle.svg';
 import { HeroOrbit } from '@/components/heroOrbit';
 import React from 'react';
 import { motion } from 'framer-motion';
