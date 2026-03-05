@@ -154,7 +154,7 @@ export const HeroSection = () => {
                 onBlur={() => setShowDefinition(false)}
                 role="button"
               >
-                "Surudoi"
+                &quot;Surudoi&quot;
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-300 group-hover:w-full transition-all duration-300" />
               
               {showDefinition && (
