@@ -11,8 +11,8 @@ export const ContactSection = () => {
       id="contacts"
       className="relative scroll-mt-[100px] py-16 sm:py-20 lg:py-32 overflow-x-clip"
     >
-      {/* Ambient Background Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[300px] sm:h-[400px] w-[600px] sm:w-[900px] bg-emerald-400/10 blur-3xl rounded-full pointer-events-none -z-10" />
+      {/* Ambient Background Glow
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[300px] sm:h-[400px] w-[600px] sm:w-[900px] bg-emerald-400/10 blur-3xl rounded-full pointer-events-none -z-10" /> */}
 
       <div className="container px-4 sm:px-6 lg:px-8">
         <SectionHeader
