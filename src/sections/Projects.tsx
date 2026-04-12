@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import Ampalaya from "@/assets/images/Ampalaya.png";
+import Smart from "@/assets/images/Smart Admission.png";
 import Inventory from "@/assets/images/Inventory system.png";
+import Coffee from "@/assets/images/Liberica.png";
 import PPT from "@/assets/images/ppt.png";
 import CheckCircleIcon from "@/assets/icons/check-circle.svg";
 import ArrowUpRightIcon from '@/assets/icons/arrow-up-right.svg';
@@ -17,9 +19,39 @@ const portfolioProjects = [
       { title: "Improved site speed by 50%" },
       { title: "Increased mobile traffic by 35%" },
     ],
-    link: "https://www.figma.com/proto/Pt4vlQq8RzRtyDtMBm038I/Untitled?node-id=0-1&t=XsMnfF1W6dfrmyEx-1",
+    link: "https://npknows.vercel.app/",
     image: Ampalaya,
   },
+  {
+    company: "National University - Lipa",
+    year: "2025",
+    title: "NU-LIPA Smart Admission System",
+    results: [
+      { title: "Boosted sales by 20%" },
+      { title: "Expanded customer reach by 35%" },
+      { title: "Increased brand awareness by 15%" },
+    ],
+    link: "https://github.com/itzjmbruhhh/NU_Admission",
+    image: Smart,
+  },
+
+   {
+    company: "Department of Agriculture",
+    year: "2026",
+    title: "BarakoSenser: Coffee Liberica Authenticity Classifier",
+    results: [
+      { title: "Boosted sales by 20%" },
+      { title: "Expanded customer reach by 35%" },
+      { title: "Increased brand awareness by 15%" },
+    ],
+    link: "https://barakosense-484055099685.asia-southeast1.run.app/",
+    image: Coffee,
+  },
+
+
+
+
+
   {
     company: "3 BROTHER STORE",
     year: "2024",

@@ -5,7 +5,11 @@ import { ToolboxItems } from "@/components/ToolboxItems";
 import Image from "next/image";
 import { CardHeader } from "@/components/CardHeader";
 import { motion } from "framer-motion";
+import { AchievementsCard } from "@/components/AchievementsCard";
+import { ImpactCard } from "@/components/ImpactCard";
+
 import React, { useRef, useState, useEffect } from "react";
+
 
 import Childhood from "@/assets/images/Childhood.png";
 import SurudoiProf from "@/assets/images/Surudoi.jpg";
@@ -45,6 +49,7 @@ const journeyImages = [
   { src: CorporateProf, alt: "Corporate Profile" },
 ];
 
+
 export const AboutSection = () => {
   const constraintRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -67,8 +72,9 @@ export const AboutSection = () => {
         />
 
         <div className="mt-20 flex flex-col gap-8">
-          {/* FIRST ROW */}
+          {/* ROW 1 — Journey + Photo Carousel */}
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+
             {/* Journey Text */}
             <Card className="min-h-[320px] flex flex-col justify-between md:col-span-2 lg:col-span-2">
               <CardHeader
@@ -77,35 +83,31 @@ export const AboutSection = () => {
                 className="text-center whitespace-normal lg:whitespace-nowrap"
               />
               <p className="text-gray-300 text-sm md:text-base leading-relaxed px-4 pb-4 text-justify">
-                Since childhood, I&apos;ve been fascinated by technology and problem-solving. In Grade 8, I started 
-                programming in C, creating simple <em>Hello World</em> programs and basic games that sparked 
+                Since childhood, I&apos;ve been fascinated by technology and problem-solving. In Grade 8, I started
+                programming in C, creating simple <em>Hello World</em> programs and basic games that sparked
                 my curiosity for development.
                 <br />
                 <br />
                 Later, I became an fps game streamer under the name{" "}
                 <span className="text-emerald-300 font-semibold">&quot;Surudoi&quot;</span> (鋭い) — meaning{" "}
                 <em>sharp</em> and <em>focused</em>. Eventually, I shifted to creating{" "}
-                <span className="text-emerald-300 font-semibold">coding tutorials</span>, turning my 
-                forgetfulness into a strength by documenting what I learn while teaching others the daily 
-                realities of programming. Today, I channel that same analytical mindset into Machine Learning, 
+                <span className="text-emerald-300 font-semibold">coding tutorials</span>, turning my
+                forgetfulness into a strength by documenting what I learn while teaching others the daily
+                realities of programming. Today, I channel that same analytical mindset into Machine Learning,
                 staying curious and driven to craft thoughtful solutions.
               </p>
             </Card>
 
-            {/* Surudoi-Branded Photo Carousel */}
+            {/* Photo Carousel */}
             <Card className="h-[430px] md:col-span-2 lg:col-span-1 p-0 overflow-hidden relative bg-gradient-to-br from-gray-900 via-gray-800 to-emerald-950/20">
-              {/* Subtle background glow */}
               <div className="absolute inset-0 bg-emerald-400/5 [mask-image:radial-gradient(circle_at_center,black,transparent)]"></div>
-              
+
               <div className="relative w-full h-full flex items-center justify-center p-4">
                 {journeyImages.map((img, index) => {
                   const total = journeyImages.length;
-
-                  // Circular index for infinite rotation
                   let offset = index - currentIndex;
                   if (offset < -Math.floor(total / 2)) offset += total;
                   if (offset > Math.floor(total / 2)) offset -= total;
-
                   const isActive = offset === 0;
 
                   return (
@@ -117,19 +119,18 @@ export const AboutSection = () => {
                         scale: isActive ? 1 : 0.85,
                         rotateY: isActive ? 0 : offset * 20,
                       }}
-                      transition={{ 
-                        duration: 0.7, 
-                        type: "spring", 
-                        stiffness: 150, 
+                      transition={{
+                        duration: 0.7,
+                        type: "spring",
+                        stiffness: 150,
                         damping: 20,
-                        opacity: { duration: 0.5 }
+                        opacity: { duration: 0.5 },
                       }}
                       className="absolute w-full h-full cursor-pointer"
                       onClick={() => setCurrentIndex(index)}
                       style={{ perspective: "1000px" }}
                     >
                       <div className="relative w-full h-full p-4">
-                        {/* Emerald border glow for active image */}
                         {isActive && (
                           <motion.div
                             initial={{ opacity: 0 }}
@@ -137,38 +138,22 @@ export const AboutSection = () => {
                             className="absolute inset-0 rounded-2xl border-2 border-emerald-400/30 shadow-[0_0_30px_rgba(16,185,129,0.2)]"
                           />
                         )}
-                        
-                        {/* Sharp focus ring - Surudoi symbolism */}
                         {isActive && (
                           <motion.div
-                            animate={{ 
-                              scale: [1, 1.02, 1],
-                              opacity: [0.3, 0.5, 0.3]
-                            }}
-                            transition={{ 
-                              duration: 3, 
-                              repeat: Infinity,
-                              ease: "easeInOut"
-                            }}
+                            animate={{ scale: [1, 1.02, 1], opacity: [0.3, 0.5, 0.3] }}
+                            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                             className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-emerald-400/20 to-emerald-300/10 blur-xl"
                           />
                         )}
-
                         <Image
                           src={img.src}
                           alt={img.alt}
                           fill
-                          className={`object-cover rounded-2xl shadow-2xl transition-all duration-700 ${
-                            isActive 
-                              ? "" 
-                              : "opacity-70"
-                          }`}
+                          className={`object-cover rounded-2xl shadow-2xl transition-all duration-700 ${isActive ? "" : "opacity-70"}`}
                           style={{
                             filter: isActive ? "grayscale(0) brightness(1)" : "grayscale(0.3) brightness(0.8)",
                           }}
                         />
-
-                        {/* Corner accent - Sharp/Precision indicator */}
                         {isActive && (
                           <div className="absolute top-6 right-6 w-3 h-3">
                             <div className="absolute inset-0 bg-emerald-400 rounded-full animate-pulse"></div>
@@ -181,15 +166,15 @@ export const AboutSection = () => {
                 })}
               </div>
 
-              {/* Sleek Navigation Dots */}
+              {/* Navigation Dots */}
               <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20 bg-gray-900/60 backdrop-blur-md px-4 py-2 rounded-full border border-emerald-400/20">
                 {journeyImages.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrentIndex(index)}
                     className={`transition-all duration-300 rounded-full ${
-                      index === currentIndex 
-                        ? "w-8 h-2 bg-emerald-400 shadow-[0_0_10px_rgba(16,185,129,0.5)]" 
+                      index === currentIndex
+                        ? "w-8 h-2 bg-emerald-400 shadow-[0_0_10px_rgba(16,185,129,0.5)]"
                         : "w-2 h-2 bg-gray-500 hover:bg-emerald-300/50"
                     }`}
                     aria-label={`View ${journeyImages[index].alt}`}
@@ -197,7 +182,7 @@ export const AboutSection = () => {
                 ))}
               </div>
 
-              {/* Image label overlay */}
+              {/* Image label */}
               <motion.div
                 key={currentIndex}
                 initial={{ opacity: 0, y: 10 }}
@@ -211,50 +196,34 @@ export const AboutSection = () => {
               </motion.div>
             </Card>
 
-            {/*2nd Row */}
-                  
-           <Card className="min-h-[320px] flex flex-col justify-between md:col-span-2 lg:col-span-1 ">
-              
-              
-            <CardHeader
+            {/* ROW 2 — Achievements + Impact */}
+
+            
+
+            {/* Impact — stat grid */}
+            <Card className="min-h-[380px] flex flex-col md:col-span-2 lg:col-span-1">
+            {/* <Card className="min-h-[380px] flex flex-col md:col-span-2 lg:col-span-2"> */}
+              <CardHeader
+                title="Impacts"
+                description="Meaningful Contributions"
+                className="text-center whitespace-normal lg:whitespace-nowrap"
+              />
+              <ImpactCard />
+            </Card>
+
+            {/* Achievements — slideshow of real photos */}
+            <Card className="min-h-[380px] flex flex-col md:col-span-2 lg:col-span-2">
+            {/* <Card className="min-h-[380px] flex flex-col md:col-span-2 lg:col-span-1"> */}
+              <CardHeader
                 title="Achievements"
                 description="Milestones that reflect my growth, dedication, and pursuit of excellence."
                 className="text-center whitespace-normal lg:whitespace-nowrap"
-                
               />
-              
-            </Card>
-
-
-            <Card className="min-h-[320px] flex flex-col justify-between md:col-span-2 lg:col-span-2 ">
-              <CardHeader
-                title="Impact"
-                description="The ways I’ve made a difference and contributed to meaningful change."
-                className="text-center whitespace-normal lg:whitespace-nowrap"
-              />
-              
-            </Card>
-
-            
-
-
-
-
-            
-
-            {/* Reads */}
-            <Card className="h-[320px] md:col-span-2 lg:col-span-1">
-              <CardHeader
-                title="My Reads"
-                description="Explore the books shaping my perspectives."
-              />
-              <div className="w-40 mx-auto mt-2 md:mt-0">
-                <Image src={bookImage} alt="Book cover" />
-              </div>
+              <AchievementsCard />
             </Card>
 
             {/* Toolbox */}
-            <Card className="h-[320px] md:col-span-3 lg:col-span-2">
+            <Card className="h-[320px] md:col-span-2 lg:col-span-2">
               <CardHeader
                 title="My Toolbox"
                 description="Explore the technologies and tools I use to craft exceptional digital experiences."
@@ -270,9 +239,22 @@ export const AboutSection = () => {
                 itemsWrapperClassName="animate-move-right [animation-duration:15s]"
               />
             </Card>
+
+            {/* Reads */}
+            <Card className="h-[320px] md:col-span-1 lg:col-span-1">
+              <CardHeader
+                title="My Reads"
+                description="Explore the books shaping my perspectives."
+              />
+              <div className="w-40 mx-auto mt-2 md:mt-0">
+                <Image src={bookImage} alt="Book cover" />
+              </div>
+            </Card>
           </div>
 
-          {/* Hobbies & Map */}
+          
+
+          {/* ROW 3 — Hobbies + Map */}
           <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
             <Card className="h-[320px] flex flex-col md:col-span-3 lg:col-span-3">
               <CardHeader
@@ -284,10 +266,7 @@ export const AboutSection = () => {
                   <motion.div
                     key={hobby.title}
                     className="inline-flex items-center gap-2 px-6 bg-gradient-to-r from-emerald-300 to-sky-400 rounded-full py-1.5 absolute"
-                    style={{
-                      left: hobby.left,
-                      top: hobby.top,
-                    }}
+                    style={{ left: hobby.left, top: hobby.top }}
                     drag
                     dragConstraints={constraintRef}
                   >
@@ -297,16 +276,14 @@ export const AboutSection = () => {
                 ))}
               </div>
             </Card>
+
             <Card className="h-[320px] p-0 relative md:col-span-2 lg:col-span-2">
               <Image
                 src={mapImage}
                 alt="map"
                 className="h-full w-full object-cover object-left-top"
               />
-              <div
-                className="absolute top-1/2 left-1/2
-                -translate-x-1/2 -translate-y-1/2 size-20 rounded-full  after:content-[''] after:absolute after:inset-0 after:outline after:outline-2 after:-outline-offset-2 after:rounded-full after:outline-gray-950/30"
-              >
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-20 rounded-full after:content-[''] after:absolute after:inset-0 after:outline after:outline-2 after:-outline-offset-2 after:rounded-full after:outline-gray-950/30">
                 <div className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-300 to-sky-400 -z-20 animate-ping [animation-duration:2s]"></div>
                 <div className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-300 to-sky-400 -z-10"></div>
                 <Image src={mapemoji} alt="Smiling memoji" className="size-20 rounded-full" />
