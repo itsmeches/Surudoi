@@ -7,6 +7,7 @@ import { CardHeader } from "@/components/CardHeader";
 import { motion } from "framer-motion";
 import { AchievementsCard } from "@/components/AchievementsCard";
 import { ImpactCard } from "@/components/ImpactCard";
+import { ReadsCard } from "@/components/ReadsCard";
 
 import React, { useRef, useState, useEffect } from "react";
 
@@ -21,6 +22,22 @@ import CSSIcon from "@/assets/icons/css3.svg";
 import ReactIcon from "@/assets/icons/react.svg";
 import ChromeIcon from "@/assets/icons/chrome.svg";
 import GithubIcon from "@/assets/icons/github.svg";
+import GoogleCloudIcon from "@/assets/icons/googlecloud.svg";
+import NextJsIcon from "@/assets/icons/next-js-svgrepo-com.svg";
+import PHPIcon from "@/assets/icons/php.svg";
+import PythonIcon from "@/assets/icons/python.svg";
+import TypescriptIcon from "@/assets/icons/typescript.svg";
+import VercelIcon from "@/assets/icons/vercel-icon-svgrepo-com.svg";
+import DockerIcon from "@/assets/icons/docker.svg";
+import GitIcon from "@/assets/icons/git.svg";
+import JupyterIcon from "@/assets/icons/jupyter.svg";
+import NumpyIcon from "@/assets/icons/numpy.svg";
+import OpencvIcon from "@/assets/icons/opencv.svg";
+import PandasIcon from "@/assets/icons/pandas.svg";
+import RailwayIcon from "@/assets/icons/railway.svg";
+import ScikitlearnIcon from "@/assets/icons/scikitlearn.svg";
+import TailwindcssIcon from "@/assets/icons/tailwindcss.svg";
+import TensorflowIcon from "@/assets/icons/tensorflow.svg";
 import mapImage from "@/assets/images/map.png";
 import mapemoji from "@/assets/images/mapmoji.png";
 
@@ -31,6 +48,22 @@ const toolboxItems = [
   { title: "REACT", iconType: ReactIcon },
   { title: "Chrome", iconType: ChromeIcon },
   { title: "Github", iconType: GithubIcon },
+  { title: "Google Cloud", iconType: GoogleCloudIcon },
+  { title: "Next.js", iconType: NextJsIcon },
+  { title: "PHP", iconType: PHPIcon },
+  { title: "Python", iconType: PythonIcon },
+  { title: "Typescript", iconType: TypescriptIcon },
+  { title: "Vercel", iconType: VercelIcon },
+  { title: "Docker", iconType: DockerIcon },
+  { title: "Git", iconType: GitIcon },
+  { title: "Jupyter", iconType: JupyterIcon },
+  { title: "Numpy", iconType: NumpyIcon },
+  { title: "OpenCV", iconType: OpencvIcon },
+  { title: "Pandas", iconType: PandasIcon },
+  { title: "Railway", iconType: RailwayIcon },
+  { title: "Scikit-learn", iconType: ScikitlearnIcon },
+  { title: "Tailwind CSS", iconType: TailwindcssIcon },
+  { title: "TensorFlow", iconType: TensorflowIcon },
 ];
 
 const hobbies = [
@@ -222,7 +255,7 @@ export const AboutSection = () => {
               <AchievementsCard />
             </Card>
 
-            {/* Toolbox */}
+            {/* Toolbox
             <Card className="h-[320px] md:col-span-2 lg:col-span-2">
               <CardHeader
                 title="My Toolbox"
@@ -238,9 +271,9 @@ export const AboutSection = () => {
                 className="mt-3"
                 itemsWrapperClassName="animate-move-right [animation-duration:15s]"
               />
-            </Card>
+            </Card> */}
 
-            {/* Reads */}
+            {/* Reads
             <Card className="h-[320px] md:col-span-1 lg:col-span-1">
               <CardHeader
                 title="My Reads"
@@ -250,8 +283,36 @@ export const AboutSection = () => {
                 <Image src={bookImage} alt="Book cover" />
               </div>
             </Card>
-          </div>
+          </div> */}
 
+          {/* ROW 3 — Toolbox + Reads */}
+            <Card className="min-h-[320px] md:col-span-2 lg:col-span-2 flex flex-col">
+              <CardHeader
+                title="My Toolbox"
+                description="Explore the technologies and tools I use to craft exceptional digital experiences."
+              />
+              <div className="flex flex-col justify-center flex-1 gap-3 mt-2">
+                <ToolboxItems
+                  items={toolboxItems}
+                  itemsWrapperClassName="animate-move-left [animation-duration:30s]"
+                />
+                <ToolboxItems
+                  items={toolboxItems}
+                  itemsWrapperClassName="animate-move-right [animation-duration:15s]"
+                />
+              </div>
+            </Card>
+ 
+            <Card className="min-h-[320px] md:col-span-1 lg:col-span-1 flex flex-col">
+              <CardHeader
+                title="My Reads"
+                description="Books shaping my thinking."
+              />
+              <ReadsCard />
+            </Card>
+ 
+          </div>
+          {/* ── End main grid ── */}
           
 
           {/* ROW 3 — Hobbies + Map */}
