@@ -15,7 +15,10 @@ export const ImpactCard = ({ className }: { className?: string }) => {
     const container = containerRef.current;
     if (!container) return;
 
-    const speed = 40; // px per second (VERY IMPORTANT)
+    // Set scrollLeft to 1 to avoid initial jump
+    container.scrollLeft = 1;
+
+    const speed = 40; // px per second
 
     const animate = (time: number) => {
       if (!container) return;
@@ -27,10 +30,9 @@ export const ImpactCard = ({ className }: { className?: string }) => {
       if (!isPausedRef.current) {
         container.scrollLeft += speed * delta;
 
-        const halfWidth = container.scrollWidth / 2;
-
-        if (container.scrollLeft >= halfWidth) {
-          container.scrollLeft -= halfWidth;
+        const totalWidth = container.scrollWidth / 2;
+        if (container.scrollLeft >= totalWidth) {
+          container.scrollLeft -= totalWidth;
         }
       }
 
@@ -63,8 +65,8 @@ export const ImpactCard = ({ className }: { className?: string }) => {
         ref={containerRef}
         className="flex gap-4 sm:gap-6 px-4 py-2 overflow-x-auto no-scrollbar"
       >
-        {/* 🔥 triple copy = guaranteed overflow */}
-        {[...impacts, ...impacts, ...impacts].map((item, index) => (
+        {/* double copy = seamless infinite loop */}
+        {[...impacts, ...impacts].map((item, index) => (
           <motion.div
             key={`${item.label}-${index}`}
             className="min-w-[240px] sm:min-w-[260px] lg:min-w-[300px] 
@@ -74,9 +76,11 @@ export const ImpactCard = ({ className }: { className?: string }) => {
             hover:border-emerald-400/40 hover:bg-white/10 
             transition-all duration-300"
           >
-            {/* Icon */}
-            <div className="mb-3 sm:mb-4 opacity-80 transition group-hover:scale-110 text-[clamp(1.5rem,3vw,2rem)]">
-              {item.icon}
+            {/* Icon (SVG, themed) */}
+            <div className="mb-3 sm:mb-4 opacity-90 transition group-hover:scale-110">
+              {item.icon && (
+                <item.icon className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 text-emerald-400 drop-shadow-[0_0_8px_rgba(16,185,129,0.25)]" />
+              )}
             </div>
 
             {/* Value */}
