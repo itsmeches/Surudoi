@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import { Inter, Calistoga } from "next/font/google";
+import { Source_Serif_4, IBM_Plex_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { RouteFade } from "@/components/RouteFade";
 import { Preloader } from "@/components/Preloader";
-import { Cursor } from "@/components/Cursor";
 import { ChatWidget } from "@/components/ChatWidget";
 
 const inter = Inter({
@@ -13,28 +12,39 @@ const inter = Inter({
   display: "swap",
 });
 
-const calistoga = Calistoga({
+const sourceSerif = Source_Serif_4({
   subsets: ["latin"],
   variable: "--font-serif",
-  weight: ["400"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  weight: ["400", "500"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Chester Andaya — Machine Learning Engineer",
+  title: "Chester Andaya — Working Record",
   description:
-    "ML engineer and CS undergraduate (GPA 3.64). ICMCR 2026 author. Computer vision systems shipped end-to-end with PyTorch, React, and Django.",
+    "Researcher, engineer, builder, leader. ICMCR 2026 (Tokyo) computer vision research, full-stack government systems, and ML products shipped end-to-end.",
   openGraph: {
-    title: "Chester Andaya — Machine Learning Engineer",
+    title: "Chester Andaya — Working Record",
     description:
-      "Computer vision and full-stack work with measurable outcomes. ICMCR 2026 (Tokyo). NPK detection · Enrollment prediction · Barako Sense · CHED CRIS.",
+      "Researcher, engineer, builder, leader. ICMCR 2026 (Tokyo) computer vision research, full-stack government systems, and ML products shipped end-to-end.",
     type: "website",
   },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${calistoga.variable}`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${sourceSerif.variable} ${plexMono.variable}`}
+    >
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -51,7 +61,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <Preloader />
-        <Cursor />
         <ScrollProgress />
         <RouteFade>{children}</RouteFade>
         <ChatWidget />

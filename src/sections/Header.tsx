@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 const NAV = [
-  { id: "projects", label: "Work" },
-  { id: "experience", label: "Experience" },
-  { id: "about", label: "About" },
-  { id: "contacts", label: "Contact" },
+  { id: "log", label: "Work", index: "01" },
+  { id: "experience", label: "Experience", index: "02" },
+  { id: "about", label: "About", index: "03" },
+  { id: "contacts", label: "Contact", index: "04" },
 ];
 
 export const Header = () => {
@@ -31,7 +31,7 @@ export const Header = () => {
       },
       { rootMargin: "-50% 0px -50% 0px", threshold: 0 }
     );
-    ["home", "about", "experience", "projects", "contacts"].forEach((id) => {
+    ["home", "about", "experience", "log", "contacts"].forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
     });
@@ -49,15 +49,9 @@ export const Header = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 motion-safe:animate-chrome-in">
-      {/*
-        Chrome layer — always mounted with full blur + bg + border applied.
-        ONLY opacity transitions on scroll. This avoids the well-known
-        backdrop-filter cross-browser transition jank (Chrome doesn't
-        animate `backdrop-filter`; Safari does — mixing them flashes).
-      */}
       <div
         aria-hidden
-        className={`absolute inset-0 -z-10 backdrop-blur-xl bg-page/85 border-b border-line/60 shadow-[0_8px_24px_-12px_rgb(0_0_0/0.4)] transition-opacity duration-[420ms] ease-out ${
+        className={`absolute inset-0 -z-10 bg-page/95 border-b border-line/70 transition-opacity duration-300 ${
           scrolled ? "opacity-100" : "opacity-0"
         }`}
       />
@@ -65,11 +59,11 @@ export const Header = () => {
       <div className="container flex h-16 items-center justify-between">
         <button
           onClick={() => scrollTo("home")}
-          className="group inline-flex items-center gap-2 text-sm font-medium"
+          className="group inline-flex items-baseline gap-2"
           aria-label="Go to top"
         >
-          <span className="inline-block h-2 w-2 rounded-full bg-accent" />
-          <span>Chester Andaya</span>
+          <span className="display font-serif text-[15px] text-fg">Chester Andaya</span>
+          <span className="eyebrow hidden sm:inline">— working record</span>
         </button>
 
         <nav aria-label="Primary" className="hidden md:block">
@@ -79,10 +73,11 @@ export const Header = () => {
                 <button
                   onClick={() => scrollTo(item.id)}
                   aria-current={active === item.id ? "page" : undefined}
-                  className={`relative px-3 py-2 text-sm transition-colors duration-200 ${
+                  className={`relative flex items-center gap-2 px-3 py-2 text-sm transition-colors duration-150 ${
                     active === item.id ? "text-fg" : "text-muted hover:text-fg"
                   }`}
                 >
+                  <span className="mono text-[10px] text-accent">{item.index}</span>
                   {item.label}
                   {active === item.id && (
                     <span className="absolute left-3 right-3 -bottom-px h-px bg-fg" />
@@ -97,14 +92,14 @@ export const Header = () => {
           <a
             href="/cv.pdf"
             download="Chester-Andaya-CV.pdf"
-            className="hidden sm:inline-flex h-9 items-center rounded-full border border-line/60 px-4 text-sm font-medium text-muted hover:text-fg hover:border-line transition-colors duration-200"
+            className="hidden sm:inline-flex h-9 items-center border border-line/70 px-4 text-sm font-medium text-muted hover:text-fg hover:border-line transition-colors duration-150"
           >
             Resume
           </a>
 
           <button
             type="button"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-line/60 text-muted hover:text-fg hover:border-line transition-colors duration-200 md:hidden"
+            className="inline-flex h-9 w-9 items-center justify-center border border-line/70 text-muted hover:text-fg hover:border-line transition-colors duration-150 md:hidden"
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
             aria-controls="mobile-nav"
@@ -128,22 +123,20 @@ export const Header = () => {
       {menuOpen && (
         <div
           id="mobile-nav"
-          className="border-t border-line/60 bg-page/95 px-6 pb-5 pt-4 backdrop-blur md:hidden"
+          className="border-t border-line/70 bg-page px-6 pb-5 pt-4 md:hidden"
         >
           <nav aria-label="Mobile" className="container">
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col gap-1">
               {NAV.map((item) => (
                 <li key={item.id}>
                   <button
                     onClick={() => scrollTo(item.id)}
-                    className={`flex w-full items-center justify-between rounded-xl px-4 py-3 text-left text-sm transition-colors duration-200 ${
-                      active === item.id
-                        ? "surface text-fg"
-                        : "text-muted hover:text-fg hover:bg-subtle/60"
+                    className={`flex w-full items-center gap-3 border-b border-line/50 px-1 py-3 text-left text-sm transition-colors duration-150 ${
+                      active === item.id ? "text-fg" : "text-muted hover:text-fg"
                     }`}
                   >
+                    <span className="mono text-[10px] text-accent">{item.index}</span>
                     <span>{item.label}</span>
-                    <span className="text-xs uppercase tracking-[0.2em] text-muted">Go</span>
                   </button>
                 </li>
               ))}

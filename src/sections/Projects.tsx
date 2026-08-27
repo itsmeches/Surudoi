@@ -2,6 +2,7 @@ import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Reveal } from "@/components/Reveal";
+import { caseStudies } from "@/data/caseStudies";
 
 import Ampalaya from "@/assets/images/Ampalaya.png";
 import Smart from "@/assets/images/Smart Admission.png";
@@ -18,10 +19,7 @@ type Project = {
   impact: { metric: string; label: string }[];
   stack: string[];
   image: StaticImageData;
-  /** Show a "Featured · …" pill above the title. */
-  feature?: string;
-  /** Render a corner badge on the preview image (e.g. for stock/illustrative
-   *  visuals when the real product is internal / under NDA). */
+  imageAlt: string;
   imageBadge?: string;
 };
 
@@ -41,7 +39,25 @@ const projects: Project[] = [
     ],
     stack: ["PyTorch", "ResNet50", "OpenCV", "GradCAM", "React", "Django"],
     image: Ampalaya,
-    feature: "Published research · ICMCR 2026 Tokyo",
+    imageAlt: "NPK deficiency detection system interface",
+  },
+  {
+    slug: "ched-cris",
+    year: "2026",
+    org: "CHED Regional Office IV-A",
+    title: "CHED Regional Information System (CRIS)",
+    role: "Full-Stack Developer Intern",
+    summary:
+      "Production internal platform used by the Commission on Higher Education to manage regional reporting workflows. I ship UI and API improvements against real institutional data, on a real release cadence.",
+    impact: [
+      { metric: "Production", label: "deployed government system" },
+      { metric: "Full Stack", label: "React + Laravel + REST APIs" },
+      { metric: "Delivery", label: "feature shipping & debugging" },
+    ],
+    stack: ["React", "Laravel", "REST APIs", "SQL"],
+    image: Inventory,
+    imageAlt: "CRIS workflow and reporting module interface",
+    imageBadge: "Internal product · illustrative preview",
   },
   {
     slug: "enrollment-probability-prediction",
@@ -58,6 +74,7 @@ const projects: Project[] = [
     ],
     stack: ["Scikit-learn", "Random Forest", "KNN", "Flask", "React"],
     image: Smart,
+    imageAlt: "Enrollment probability analytics dashboard",
   },
   {
     slug: "barako-sense",
@@ -74,169 +91,165 @@ const projects: Project[] = [
     ],
     stack: ["MobileNetV2", "Multi-Input CNN", "OpenCV", "Django", "React"],
     image: Coffee,
-  },
-  {
-    slug: "ched-cris",
-    year: "2026",
-    org: "CHED Regional Office IV-A",
-    title: "CHED Regional Information System (CRIS)",
-    role: "Full-Stack Developer Intern",
-    summary:
-      "Production internal platform used by the Commission on Higher Education to manage regional reporting workflows. I ship UI and API improvements against real institutional data, on a real release cadence.",
-    impact: [
-      { metric: "Live", label: "government deployment" },
-      { metric: "Full stack", label: "React + Laravel + SQL" },
-      { metric: "Ship", label: "review · merge · deploy" },
-    ],
-    stack: ["React", "Laravel", "REST APIs", "SQL"],
-    image: Inventory,
-    imageBadge: "Internal product · illustrative preview",
+    imageAlt: "Barako Sense model output and profiling interface",
   },
 ];
 
-export const ProjectsSection = () => {
-  return (
-    <section
-      id="projects"
-      className="relative isolate overflow-hidden border-t hairline py-24 md:py-32"
-    >
-      {/* Ambient backdrop — softer than hero, but breaks the flat-black slab */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-32 left-1/2 -z-10 h-[420px] w-[760px] -translate-x-1/2 rounded-full opacity-60 blur-3xl"
-        style={{
-          background:
-            "radial-gradient(closest-side, rgb(var(--accent) / 0.10), transparent 70%)",
-        }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.45]"
-        style={{
-          backgroundImage:
-            "radial-gradient(rgb(var(--fg) / 0.05) 1px, transparent 1px)",
-          backgroundSize: "26px 26px",
-          maskImage:
-            "radial-gradient(120% 60% at 50% 0%, #000 25%, transparent 75%)",
-          WebkitMaskImage:
-            "radial-gradient(120% 60% at 50% 0%, #000 25%, transparent 75%)",
-        }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-px bg-gradient-to-r from-transparent via-line/60 to-transparent"
-      />
+const findStudy = (slug: string) => caseStudies.find((c) => c.slug === slug);
 
+export const ProjectsSection = () => {
+  const flagships = projects.filter((p) => findStudy(p.slug)?.flagship);
+  const minor = projects.filter((p) => !findStudy(p.slug)?.flagship);
+
+  return (
+    <section id="log" className="relative isolate border-b hairline py-24 md:py-32">
       <div className="container">
         <SectionHeader
-          eyebrow="Selected work"
-          title="Four systems, shipped end-to-end."
-          description="Research, analytics, and government engineering — each with measurable outcomes, real users, and decisions I can defend."
+          index="01"
+          eyebrow="The log"
+          title="What I've built, and how I decided to build it."
+          description="Two flagship entries carry the full problem → approach → decision → result narrative. The rest are logged shorter, but the reasoning behind them is one click away."
         />
 
-        <ul className="mt-20 space-y-24">
-          {projects.map((p, i) => (
-            <Reveal as="li" key={p.slug} delay={Math.min(i * 80, 240)}>
-              <article className="grid gap-10 lg:grid-cols-12 lg:items-center">
-                {/* Visual */}
-                <Link
-                  href={`/work/${p.slug}`}
-                  aria-label={`Open ${p.title} case study`}
-                  className={`group block lg:col-span-7 ${
-                    i % 2 === 1 ? "lg:order-2" : ""
-                  }`}
-                >
-                  <div className="lift relative aspect-[16/10] overflow-hidden rounded-2xl border border-line/70 bg-subtle">
-                    <Image
-                      src={p.image}
-                      alt={p.title}
-                      fill
-                      sizes="(min-width: 1024px) 640px, (min-width: 640px) 80vw, 100vw"
-                      className="object-cover transition-transform duration-[700ms] ease-out group-hover:scale-[1.025]"
-                    />
-                    <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-fg/5" />
-
-                    {p.imageBadge && (
-                      <div className="pointer-events-none absolute right-3 top-3">
-                        <span className="inline-flex items-center gap-1.5 rounded-full border border-line/70 bg-bg/80 px-2.5 py-1 text-[10px] uppercase tracking-[0.16em] text-muted backdrop-blur">
-                          <span className="h-1 w-1 rounded-full bg-accent" />
-                          {p.imageBadge}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                </Link>
-
-                {/* Copy */}
-                <div
-                  className={`lg:col-span-5 ${
-                    i % 2 === 1 ? "lg:order-1" : ""
-                  }`}
-                >
-                  {p.feature && (
-                    <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/[0.08] px-3 py-1 text-[10.5px] font-medium uppercase tracking-[0.18em] text-accent">
-                      <span className="relative flex h-1.5 w-1.5">
-                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
-                        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
-                      </span>
-                      Featured · {p.feature}
-                    </div>
-                  )}
-
-                  <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[11px] uppercase tracking-[0.18em] text-muted">
-                    <span className="tabular-nums text-fg/70">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span className="text-muted/50">/</span>
-                    <span>{p.year}</span>
-                    <span className="text-muted/50">·</span>
-                    <span>{p.org}</span>
-                  </div>
-
-                  <h3 className="display mt-4 font-serif text-[1.75rem] leading-[1.1] md:text-[2rem]">
-                    {p.title}
-                  </h3>
-
-                  <p className="mt-2 text-[11px] uppercase tracking-[0.16em] text-muted">
-                    {p.role}
-                  </p>
-
-                  <p className="mt-5 text-[15px] leading-relaxed text-muted">
-                    {p.summary}
-                  </p>
-
-                  <dl className="mt-6 grid grid-cols-3 gap-4 border-y border-line/60 py-5">
-                    {p.impact.map((m) => (
-                      <div key={m.label}>
-                        <dt className="text-[10px] uppercase tracking-[0.16em] text-muted">
-                          {m.label}
-                        </dt>
-                        <dd className="display mt-1 font-serif text-xl text-fg md:text-2xl">
-                          {m.metric}
-                        </dd>
-                      </div>
-                    ))}
-                  </dl>
-
-                  <div className="mt-5 text-xs text-muted">
-                    {p.stack.join("  ·  ")}
-                  </div>
-
-                  <div className="mt-7">
+        {/* Flagship entries — full narrative weight */}
+        <ol className="mt-16 space-y-24">
+          {flagships.map((p, i) => {
+            const study = findStudy(p.slug)!;
+            return (
+              <Reveal as="li" key={p.slug} delay={Math.min(i * 80, 160)}>
+                <article className="border border-line/70">
+                  <div className="grid gap-0 lg:grid-cols-12">
                     <Link
                       href={`/work/${p.slug}`}
-                      className="group/cta inline-flex h-10 items-center text-sm font-medium text-fg"
+                      aria-label={`Open ${p.title} case study`}
+                      className={`group relative block aspect-[16/11] overflow-hidden border-line/70 lg:col-span-5 lg:aspect-auto ${
+                        i % 2 === 1 ? "lg:order-2 lg:border-l" : "lg:border-r"
+                      }`}
                     >
-                      Read case study
-                      <span className="ml-2 inline-block h-px w-6 bg-fg/60 transition-all group-hover/cta:w-10 group-hover/cta:bg-fg" />
+                      <Image
+                        src={p.image}
+                        alt={p.imageAlt}
+                        fill
+                        sizes="(min-width: 1024px) 480px, 100vw"
+                        className="object-cover grayscale-[15%] transition-[filter] duration-300 group-hover:grayscale-0"
+                      />
+                      {p.imageBadge && (
+                        <div className="pointer-events-none absolute right-3 top-3">
+                          <span className="mono inline-flex items-center gap-1.5 border border-line/70 bg-bg/85 px-2.5 py-1 text-[10px] uppercase tracking-[0.12em] text-muted">
+                            {p.imageBadge}
+                          </span>
+                        </div>
+                      )}
                     </Link>
+
+                    <div
+                      className={`p-7 md:p-9 lg:col-span-7 ${
+                        i % 2 === 1 ? "lg:order-1" : ""
+                      }`}
+                    >
+                      <div className="mono inline-flex items-center gap-2 border border-accent/40 bg-accent/[0.08] px-2.5 py-1 text-[10.5px] uppercase tracking-[0.12em] text-accent">
+                        {study.tag}
+                      </div>
+
+                      <div className="mt-4 flex flex-wrap items-center gap-x-2.5 gap-y-1 eyebrow">
+                        <span className="entry-index">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <span className="text-line">/</span>
+                        <span>{p.year}</span>
+                        <span className="text-line">·</span>
+                        <span>{p.org}</span>
+                      </div>
+
+                      <h3 className="display mt-4 font-serif text-[1.6rem] leading-[1.15] md:text-[1.9rem]">
+                        {p.title}
+                      </h3>
+                      <p className="eyebrow mt-2">{p.role}</p>
+
+                      <p className="mt-5 text-[15px] leading-relaxed text-muted">
+                        {p.summary}
+                      </p>
+
+                      <dl className="mt-6 grid grid-cols-3 gap-4 border-y border-line/60 py-5">
+                        {p.impact.map((m) => (
+                          <div key={m.label}>
+                            <dt className="eyebrow">{m.label}</dt>
+                            <dd className="display mt-1 font-serif text-xl text-fg md:text-2xl">
+                              {m.metric}
+                            </dd>
+                          </div>
+                        ))}
+                      </dl>
+
+                      {/* Inline reasoning — problem / decision, condensed for the homepage */}
+                      <div className="mt-6 space-y-4 text-sm leading-relaxed">
+                        <Row label="Problem">{study.problem}</Row>
+                        <Row label="Key decision">{study.decisions[0]?.body}</Row>
+                      </div>
+
+                      <div className="mt-5 mono text-xs text-muted">
+                        {p.stack.join("  ·  ")}
+                      </div>
+
+                      <Link
+                        href={`/work/${p.slug}`}
+                        className="group/cta mt-7 inline-flex h-10 items-center text-sm font-medium text-fg"
+                      >
+                        Read full case study
+                        <span className="ml-2 inline-block h-px w-6 bg-fg/60 transition-all group-hover/cta:w-10 group-hover/cta:bg-fg" />
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              </article>
-            </Reveal>
-          ))}
-        </ul>
+                </article>
+              </Reveal>
+            );
+          })}
+        </ol>
+
+        {/* Minor entries — condensed log rows */}
+        <div className="mt-20">
+          <div className="eyebrow mb-6">Also logged</div>
+          <ul className="divide-y divide-line/60 border-y border-line/60">
+            {minor.map((p) => (
+              <li key={p.slug}>
+                <Link
+                  href={`/work/${p.slug}`}
+                  className="group grid gap-3 py-6 sm:grid-cols-12 sm:items-center sm:gap-6"
+                >
+                  <div className="sm:col-span-2 eyebrow">{p.year}</div>
+                  <div className="sm:col-span-5">
+                    <h4 className="text-fg font-medium transition-colors group-hover:text-accent">
+                      {p.title}
+                    </h4>
+                    <p className="mt-1 text-sm text-muted">{p.role}</p>
+                  </div>
+                  <div className="sm:col-span-3">
+                    <div className="display font-serif text-base text-fg sm:text-lg">
+                      {p.impact[0]?.metric}
+                    </div>
+                    <div className="eyebrow mt-0.5">{p.impact[0]?.label}</div>
+                  </div>
+                  <div className="sm:col-span-2 sm:text-right">
+                    <span className="link-underline text-sm text-muted group-hover:text-fg">
+                      Read entry →
+                    </span>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
+  );
+};
+
+const Row = ({ label, children }: { label: string; children?: string }) => {
+  if (!children) return null;
+  return (
+    <div className="grid grid-cols-[5.5rem_1fr] gap-3">
+      <span className="eyebrow pt-0.5">{label}</span>
+      <span className="text-fg/85">{children}</span>
+    </div>
   );
 };

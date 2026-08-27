@@ -25,6 +25,10 @@ export type CaseStudy = {
   stack: string[];
   learnings: string;
   links: CaseStudyLink[];
+  /** Flagship entries get full narrative weight on the homepage log. */
+  flagship?: boolean;
+  /** Short badge shown above flagship titles, e.g. "Published research". */
+  tag?: string;
 };
 
 export const caseStudies: CaseStudy[] = [
@@ -67,7 +71,9 @@ export const caseStudies: CaseStudy[] = [
     stack: ["PyTorch", "ResNet50", "OpenCV", "React", "Django", "Docker", "GradCAM"],
     learnings:
       "High-performing models are only useful when paired with transparent outputs and a practical interface. This project reinforced the importance of balancing research rigor with real-world usability, especially when users are domain experts rather than ML practitioners.",
-    links: [],
+    links: [{ label: "Developer GitHub", href: "https://github.com/itsmeches" }],
+    flagship: true,
+    tag: "Published research · ICMCR 2026, Tokyo",
   },
   {
     slug: "enrollment-probability-prediction",
@@ -108,7 +114,7 @@ export const caseStudies: CaseStudy[] = [
     stack: ["Scikit-learn", "KNN", "Random Forest", "React", "Flask", "Pandas"],
     learnings:
       "Admissions data quality and feature design strongly influence model reliability. The biggest gains came from engineering and validation discipline, then packaging outputs in a workflow that administrators could immediately use.",
-    links: [],
+    links: [{ label: "Developer GitHub", href: "https://github.com/itsmeches" }],
   },
   {
     slug: "barako-sense",
@@ -149,7 +155,7 @@ export const caseStudies: CaseStudy[] = [
     stack: ["MobileNetV2", "OpenCV", "React", "Django", "Multi-Input CNN"],
     learnings:
       "Interdisciplinary projects require both technical rigor and communication clarity. Translating model outputs into language useful for researchers and domain experts was just as important as maximizing raw accuracy.",
-    links: [],
+    links: [{ label: "Developer GitHub", href: "https://github.com/itsmeches" }],
   },
   {
     slug: "ched-cris",
@@ -183,14 +189,16 @@ export const caseStudies: CaseStudy[] = [
       },
     ],
     results: [
-      { metric: "Production", label: "active government workflow support" },
-      { metric: "REST + DB", label: "integration and feature contributions" },
-      { metric: "Maintainability", label: "focus on debugging and operations" },
+      { metric: "Production", label: "CHEDRO IV-A live regional platform" },
+      { metric: "Full Stack", label: "React frontend, Laravel backend, SQL DB" },
+      { metric: "Workflow", label: "code review, REST API integration, debugging" },
     ],
     stack: ["React", "Laravel", "REST APIs", "Database Systems", "Debugging"],
     learnings:
       "Shipping in a government context sharpened my appreciation for dependable systems, clear collaboration, and disciplined debugging. Sustainable engineering practices matter as much as feature speed when software supports essential operations.",
     links: [],
+    flagship: true,
+    tag: "Live in production · government agency",
   },
 ];
 

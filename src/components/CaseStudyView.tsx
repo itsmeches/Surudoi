@@ -1,36 +1,46 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { CaseStudy } from "@/data/caseStudies";
+import { caseStudies } from "@/data/caseStudies";
 
 export const CaseStudyView = ({ study }: { study: CaseStudy }) => {
+  const index = caseStudies.findIndex((c) => c.slug === study.slug);
+
   return (
     <article className="pt-28 pb-24 md:pt-32 md:pb-32">
       <div className="container">
         <Link
-          href="/#projects"
-          className="inline-flex items-center gap-2 text-sm text-muted hover:text-fg transition-colors"
+          href="/#log"
+          className="eyebrow inline-flex items-center gap-2 hover:text-fg transition-colors"
         >
-          <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M19 12H5M11 18l-6-6 6-6" />
           </svg>
-          Back to work
+          Back to the log
         </Link>
 
         <header className="mt-10 max-w-3xl">
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs uppercase tracking-[0.18em] text-muted">
-            <span className="tabular-nums text-fg/80">{study.year}</span>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-2 eyebrow">
+            <span className="entry-index">{String(index + 1).padStart(2, "0")}</span>
+            <span className="text-line">/</span>
+            <span className="text-fg/80">{study.year}</span>
             <span className="h-1 w-1 rounded-full bg-line" />
             <span>{study.org}</span>
             <span className="h-1 w-1 rounded-full bg-line" />
             <span className="text-accent">{study.role}</span>
           </div>
+          {study.tag && (
+            <div className="mono mt-5 inline-flex items-center gap-2 border border-accent/40 bg-accent/[0.08] px-2.5 py-1 text-[10.5px] uppercase tracking-[0.12em] text-accent">
+              {study.tag}
+            </div>
+          )}
           <h1 className="display font-serif mt-5 text-4xl md:text-5xl lg:text-6xl text-fg">
             {study.title}
           </h1>
           <p className="mt-5 text-lg text-muted leading-relaxed">{study.summary}</p>
         </header>
 
-        <div className="mt-12 relative aspect-[16/9] overflow-hidden rounded-2xl border border-line/70 bg-subtle">
+        <div className="mt-12 relative aspect-[16/9] overflow-hidden border border-line/70 bg-subtle">
           <Image
             src={study.hero.src}
             alt={study.hero.alt}
@@ -55,7 +65,9 @@ export const CaseStudyView = ({ study }: { study: CaseStudy }) => {
               <ul className="space-y-3">
                 {study.architecture.map((item, i) => (
                   <li key={i} className="flex items-start gap-3 text-fg/90">
-                    <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent" />
+                    <span className="mono mt-0.5 text-xs text-accent">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -79,7 +91,7 @@ export const CaseStudyView = ({ study }: { study: CaseStudy }) => {
           </div>
 
           <aside className="lg:col-span-4">
-            <div className="lg:sticky lg:top-24 space-y-8">
+            <div className="lg:sticky lg:top-24 space-y-6">
               <Panel label="Results">
                 <ul className="space-y-3 text-sm">
                   {study.results.map((r, i) => (
@@ -92,11 +104,11 @@ export const CaseStudyView = ({ study }: { study: CaseStudy }) => {
               </Panel>
 
               <Panel label="Stack">
-                <ul className="flex flex-wrap gap-2">
+                <ul className="mono flex flex-wrap gap-2">
                   {study.stack.map((s) => (
                     <li
                       key={s}
-                      className="inline-flex items-center rounded-full border border-line/70 px-3 py-1 text-xs text-muted"
+                      className="inline-flex items-center border border-line/70 px-3 py-1 text-xs text-muted"
                     >
                       {s}
                     </li>
@@ -131,13 +143,13 @@ export const CaseStudyView = ({ study }: { study: CaseStudy }) => {
 
         <div className="mt-24 border-t hairline pt-10">
           <Link
-            href="/#projects"
-            className="inline-flex items-center gap-2 text-sm text-muted hover:text-fg transition-colors"
+            href="/#log"
+            className="eyebrow inline-flex items-center gap-2 hover:text-fg transition-colors"
           >
-            <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M19 12H5M11 18l-6-6 6-6" />
             </svg>
-            All work
+            All entries
           </Link>
         </div>
       </div>
@@ -153,7 +165,7 @@ const Section = ({ title, children }: { title: string; children: React.ReactNode
 );
 
 const Panel = ({ label, children }: { label: string; children: React.ReactNode }) => (
-  <div className="surface rounded-2xl p-5">
+  <div className="surface p-5">
     <div className="eyebrow mb-4">{label}</div>
     {children}
   </div>

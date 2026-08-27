@@ -2,7 +2,11 @@
 
 Personal portfolio built with Next.js, TypeScript, and Tailwind CSS.
 
-The site is optimized for recruiter scanability with measurable project outcomes, concise case studies, and clean information hierarchy.
+Presented as a "working record" — a log of research, engineering, and
+leadership entries rather than a generic hero/about/skills template. Flagship
+projects (published research, live government system) carry full
+problem → approach → decision → result narratives; other projects are logged
+shorter with a link to the full case study.
 
 ## Stack
 

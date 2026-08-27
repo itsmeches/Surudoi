@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from "react";
 import { SectionHeader } from "@/components/SectionHeader";
-import { SectionBackdrop } from "@/components/SectionBackdrop";
 
 export const ContactSection = () => {
   const [copied, setCopied] = useState(false);
@@ -26,17 +25,17 @@ export const ContactSection = () => {
   return (
     <section
       id="contacts"
-      className="relative isolate overflow-hidden border-t hairline py-24 md:py-32"
+      className="relative isolate py-24 md:py-32"
     >
-      <SectionBackdrop orb="top-center" tone="accent" hairline={false} />
       <div className="container max-w-3xl">
         <SectionHeader
+          index="04"
           eyebrow="Get in touch"
           title="Open to ML and SWE internships."
           description="If your team works at the intersection of research-backed ML and product delivery, I&rsquo;d love to talk. Replies within 24 hours."
         />
 
-        <div className="mt-12 flex flex-col gap-8 rounded-2xl border border-line/60 p-8 md:flex-row md:items-center md:justify-between md:p-10">
+        <div className="mt-12 flex flex-col gap-8 border border-line/70 p-8 md:flex-row md:items-center md:justify-between md:p-10">
           <div>
             <div className="eyebrow">Email</div>
             <a
@@ -45,7 +44,7 @@ export const ContactSection = () => {
             >
               {email}
             </a>
-            <p className="mt-3 text-sm text-muted">
+            <p className="mono mt-3 text-sm text-muted">
               Lipa City, Philippines · GMT+8
             </p>
           </div>
@@ -53,13 +52,13 @@ export const ContactSection = () => {
           <div className="flex flex-wrap gap-3">
             <a
               href={mailto}
-              className="inline-flex h-11 items-center rounded-full bg-fg px-5 text-sm font-medium text-bg transition-opacity hover:opacity-90"
+              className="inline-flex h-11 items-center bg-fg px-5 text-sm font-medium text-bg transition-opacity hover:opacity-90"
             >
               Send email
             </a>
             <button
               onClick={copyEmail}
-              className="inline-flex h-11 items-center rounded-full border border-line/70 px-5 text-sm font-medium text-fg transition-colors hover:border-fg/50"
+              className="inline-flex h-11 items-center border border-line/70 px-5 text-sm font-medium text-fg transition-colors hover:border-fg/50"
             >
               {copied ? "Copied" : "Copy"}
             </button>
@@ -67,7 +66,7 @@ export const ContactSection = () => {
               href="https://www.linkedin.com/in/chester-andaya-8bba4a1b9"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-11 items-center rounded-full border border-line/70 px-5 text-sm font-medium text-fg transition-colors hover:border-fg/50"
+              className="inline-flex h-11 items-center border border-line/70 px-5 text-sm font-medium text-fg transition-colors hover:border-fg/50"
             >
               LinkedIn
             </a>

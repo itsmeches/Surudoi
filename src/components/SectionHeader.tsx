@@ -1,4 +1,6 @@
 interface SectionHeaderProps {
+  /** Log entry number, e.g. "02". Reinforces the notebook motif. */
+  index?: string;
   eyebrow?: string;
   title: string;
   description?: string;
@@ -6,6 +8,7 @@ interface SectionHeaderProps {
 }
 
 export const SectionHeader = ({
+  index,
   eyebrow,
   title,
   description,
@@ -16,13 +19,14 @@ export const SectionHeader = ({
 
   return (
     <div className={`flex flex-col gap-4 max-w-2xl ${alignment}`}>
-      {eyebrow && (
+      {(index || eyebrow) && (
         <div className="eyebrow flex items-center gap-3">
-          <span className="h-px w-6 bg-accent" />
+          {index && <span className="entry-index">{index}</span>}
+          {index && eyebrow && <span className="h-px w-6 bg-line" />}
           {eyebrow}
         </div>
       )}
-      <h2 className="display font-serif text-[2rem] leading-[1.05] sm:text-[2.5rem] md:text-[3rem] tracking-[-0.02em] text-fg">
+      <h2 className="display font-serif text-[2rem] leading-[1.08] sm:text-[2.5rem] md:text-[2.75rem] tracking-[-0.01em] text-fg">
         {title}
       </h2>
       {description && (

@@ -1,8 +1,8 @@
 import { SectionHeader } from "@/components/SectionHeader";
 import { Reveal } from "@/components/Reveal";
-import { SectionBackdrop } from "@/components/SectionBackdrop";
 
-type Experience = {
+type Stage = {
+  order: string;
   role: string;
   company: string;
   period: string;
@@ -10,11 +10,14 @@ type Experience = {
   technologies: string[];
 };
 
-// Ordered by recruiter signal — research and current internship first.
-const experiences: Experience[] = [
+// Ordered as a progression of responsibility, not strict chronology —
+// each stage shows a step up in scope: research → production code →
+// independent ownership → leading people.
+const stages: Stage[] = [
   {
-    role: "Undergraduate Researcher",
-    company: "ICMCR 2026 · Publication Track",
+    order: "Researcher",
+    role: "Undergraduate ML Researcher",
+    company: "ICMCR 2026 Tokyo · Department of Agriculture Region IV-A",
     period: "2026",
     points: [
       "Co-authored and presented NPK Deficiency Detection in Bitter Gourd Leaves using ResNet50 CNN at ICMCR 2026 (Tokyo, Japan).",
@@ -24,8 +27,9 @@ const experiences: Experience[] = [
     technologies: ["PyTorch", "ResNet50", "OpenCV", "GradCAM", "Research"],
   },
   {
+    order: "Engineer",
     role: "Full-Stack Developer Intern",
-    company: "CHED Regional Office IV-A · CRIS",
+    company: "CHED Regional Office IV-A · Regional Information System (CRIS)",
     period: "2026 — Present",
     points: [
       "Ship frontend and backend features for the Commission on Higher Education Regional Information System, used internally for educational workflows and reporting.",
@@ -35,28 +39,27 @@ const experiences: Experience[] = [
     technologies: ["React", "Laravel", "REST APIs", "SQL"],
   },
   {
-    role: "Founder & Lead Content Creator",
-    company: "Independent · YouTube · TikTok · Facebook",
+    order: "Builder",
+    role: "Full-Stack & Systems Builder",
+    company: "Independent Projects & Business Operations",
+    period: "2022 — Present",
+    points: [
+      "Architected and deployed full-stack AI and web applications (NPK Vision App, Enrollment Prediction Engine, Barako Sense AI) with PyTorch, React, Django, and Flask.",
+      "Managed day-to-day operations of an independent computer shop (Lipa Computer Shop) — applying hardware diagnostics, inventory management, and operational discipline to real customer demand.",
+    ],
+    technologies: ["Full-Stack", "PyTorch", "React", "Django", "Operations", "Hardware"],
+  },
+  {
+    order: "Leader",
+    role: "Community Founder & Collegiate Team Captain",
+    company: "50K+ Learning Community & NU-Lipa Esports (Valorant)",
     period: "2022 — Present",
     points: [
       "Built and grew an educational community to 50,000+ followers publishing structured ML and programming content for Filipino undergraduates.",
-      "Use audience analytics and curriculum-style sequencing to improve retention and learner outcomes.",
-      "Treats teaching as a forcing function for clearer mental models — many of the explanations end up shaping how I document and design systems at work.",
+      "Served as Team Captain and In-Game Leader (IGL) for NU-Lipa's collegiate Valorant roster — calling mid-round tactics under clock pressure, coordinating 5-player execution, and leading post-match strategy reviews.",
+      "Translates high-pressure decision-making, clear communication, and audience building directly into engineering team collaboration and documentation.",
     ],
-    technologies: ["Content Strategy", "Curriculum Design", "Community"],
-  },
-];
-
-const alsoRoles = [
-  {
-    role: "Operations Manager & Owner",
-    company: "Lipa Computer Shop",
-    period: "Ongoing",
-  },
-  {
-    role: "Team Captain & In-Game Leader",
-    company: "NU-Lipa Esports (Valorant)",
-    period: "Collegiate",
+    technologies: ["Leadership", "Strategic Decision-Making", "Communication", "Curriculum Design", "Community"],
   },
 ];
 
@@ -104,48 +107,44 @@ const skillGroups = [
   },
   {
     label: "Data & Tooling",
-    items: ["Pandas", "NumPy", "Matplotlib", "Git", "Postman", "VS Code"],
+    items: ["Pandas", "NumPy", "Matplotlib", "Git", "Postman", "SQL"],
   },
 ];
 
 export const ExperienceSection = () => {
   return (
-    <section
-      id="experience"
-      className="relative isolate overflow-hidden border-t hairline py-24 md:py-32"
-    >
-      <SectionBackdrop orb="top-right" tone="accent-alt" />
+    <section id="experience" className="relative isolate border-b hairline py-24 md:py-32">
       <div className="container">
         <SectionHeader
-          eyebrow="Experience"
-          title="Research, product work, teaching."
-          description="Selected roles where I do the actual engineering — ordered by the signal I want recruiters to leave with."
+          index="02"
+          eyebrow="The record"
+          title="Student, researcher, engineer, builder, leader."
+          description="Each entry is a step up in ownership — from designing an experiment to owning a production feature to running a community and a team."
         />
 
-        {/* Single-rail timeline (no zig-zag) */}
-        <ol className="relative mt-16 ml-2 border-l border-line/60">
-          {experiences.map((exp, i) => (
+        <ol className="relative mt-16 border-l border-line/70">
+          {stages.map((s, i) => (
             <Reveal
               as="li"
-              key={`${exp.company}-${exp.role}`}
-              delay={Math.min(i * 90, 270)}
+              key={`${s.company}-${s.role}`}
+              delay={Math.min(i * 80, 240)}
               className="relative pl-8 pb-14 last:pb-0"
             >
               <span
                 aria-hidden
-                className="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-fg ring-4 ring-page"
+                className="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full bg-accent ring-4 ring-page"
               />
 
-              <div className="text-[11px] uppercase tracking-[0.18em] text-muted">
-                {exp.period}
+              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <span className="entry-index">{String(i + 1).padStart(2, "0")}</span>
+                <span className="eyebrow text-accent">{s.order}</span>
+                <span className="eyebrow">· {s.period}</span>
               </div>
-              <h3 className="mt-2 text-lg font-medium text-fg md:text-xl">
-                {exp.role}
-              </h3>
-              <p className="text-sm text-muted">{exp.company}</p>
+              <h3 className="mt-2 text-lg font-medium text-fg md:text-xl">{s.role}</h3>
+              <p className="text-sm text-muted">{s.company}</p>
 
               <ul className="mt-5 space-y-2.5 text-[14.5px] leading-relaxed text-muted">
-                {exp.points.map((point) => (
+                {s.points.map((point) => (
                   <li key={point} className="flex gap-3">
                     <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-muted/60" />
                     <span>{point}</span>
@@ -153,30 +152,16 @@ export const ExperienceSection = () => {
                 ))}
               </ul>
 
-              <div className="mt-4 text-[12px] text-muted">
-                {exp.technologies.join("  ·  ")}
+              <div className="mono mt-4 text-[12px] text-muted">
+                {s.technologies.join("  ·  ")}
               </div>
             </Reveal>
           ))}
         </ol>
 
-        {/* Also — compressed, signals leadership without diluting technical branding */}
-        <div className="mt-2 ml-2 border-l border-line/60 pl-8 pb-2">
-          <div className="eyebrow mb-3">Also</div>
-          <ul className="space-y-1.5 text-sm text-muted">
-            {alsoRoles.map((r) => (
-              <li key={r.role} className="flex flex-wrap items-baseline gap-x-2">
-                <span className="text-fg/90">{r.role}</span>
-                <span className="text-muted/50">·</span>
-                <span>{r.company}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
         {/* Education + Publications */}
-        <div className="mt-20 grid gap-6 lg:grid-cols-2">
-          <Reveal as="article" className="surface lift rounded-2xl p-6">
+        <div className="mt-20 grid gap-px overflow-hidden border border-line/70 lg:grid-cols-2">
+          <Reveal as="article" className="bg-page p-6 md:p-7">
             <div className="eyebrow">Education</div>
             <h3 className="mt-3 text-lg font-medium text-fg">
               B.S. Computer Science — Machine Learning
@@ -187,7 +172,7 @@ export const ExperienceSection = () => {
             <ul className="mt-4 space-y-2 text-sm text-muted">
               <li className="flex gap-2.5">
                 <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-muted/60" />
-                <span>GPA 3.64 / 4.00 · Dean&apos;s Lister</span>
+                <span>Magna Cum Laude · GPA 3.64 / 4.00 · Dean&apos;s Lister</span>
               </li>
               <li className="flex gap-2.5">
                 <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-muted/60" />
@@ -204,7 +189,7 @@ export const ExperienceSection = () => {
             </ul>
           </Reveal>
 
-          <Reveal as="article" delay={90} className="surface lift rounded-2xl p-6">
+          <Reveal as="article" delay={90} className="bg-page p-6 md:p-7">
             <div className="eyebrow">Publication</div>
             <h3 className="mt-3 text-lg font-medium text-fg">
               ICMCR 2026 · Tokyo, Japan
@@ -221,7 +206,7 @@ export const ExperienceSection = () => {
         </div>
 
         {/* Skills */}
-        <div className="mt-6 surface rounded-2xl p-6 md:p-8">
+        <div className="mt-6 border border-line/70 p-6 md:p-8">
           <div className="eyebrow mb-6">Technical stack</div>
           <div className="grid gap-8 md:grid-cols-2">
             {skillGroups.map((group) => (
@@ -231,7 +216,7 @@ export const ExperienceSection = () => {
                   {group.items.map((item) => (
                     <span
                       key={item}
-                      className="rounded-md border border-line/60 bg-subtle/60 px-2.5 py-1 text-xs text-muted"
+                      className="mono border border-line/60 px-2.5 py-1 text-xs text-muted"
                     >
                       {item}
                     </span>

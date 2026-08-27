@@ -2,30 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+  Visual identity: "working record" — an authored log, not a template.
+  Editorial serif for voice, monospace for data/metadata, generous rule
+  lines instead of cards/gradients/blur to create structure.
+*/
+
 @layer base {
   :root {
-    --bg: 9 12 16;
-    --fg: 238 245 252;
-    --muted: 145 159 175;
-    --subtle: 21 27 35;
-    --border: 44 55 68;
-    --card: 14 20 27;
-    --accent: 46 196 182;
-    --accent-strong: 22 163 154;
-    --accent-alt: 56 189 248;
-    --radius: 12px;
+    --bg: 11 12 14;
+    --fg: 237 238 233;
+    --muted: 150 152 145;
+    --subtle: 20 21 23;
+    --border: 46 48 46;
+    --card: 16 17 18;
+    --accent: 214 92 50;
+    --accent-strong: 235 111 63;
+    --accent-alt: 122 140 128;
+    --radius: 3px;
   }
 
   html.light {
-    --bg: 246 248 251;
-    --fg: 11 23 36;
-    --muted: 88 104 122;
-    --subtle: 232 238 246;
-    --border: 210 220 232;
-    --card: 255 255 255;
-    --accent: 13 148 136;
-    --accent-strong: 15 118 110;
-    --accent-alt: 14 116 144;
+    --bg: 250 249 245;
+    --fg: 20 21 18;
+    --muted: 96 98 90;
+    --subtle: 240 238 231;
+    --border: 214 210 198;
+    --card: 255 255 254;
+    --accent: 178 66 30;
+    --accent-strong: 150 52 22;
+    --accent-alt: 74 92 78;
   }
 
   html {
@@ -37,16 +43,13 @@
 
   body {
     background-color: rgb(var(--bg));
-    background-image:
-      radial-gradient(55% 32% at 14% -10%, rgb(var(--accent) / 0.06), transparent 75%),
-      radial-gradient(46% 28% at 90% -6%, rgb(var(--accent-alt) / 0.045), transparent 72%);
     color: rgb(var(--fg));
     font-feature-settings: "ss01", "cv11";
     min-height: 100vh;
   }
 
   ::selection {
-    background: rgb(var(--accent) / 0.25);
+    background: rgb(var(--accent) / 0.28);
     color: rgb(var(--fg));
   }
 }
@@ -59,58 +62,70 @@
   .text-balance { text-wrap: balance; }
   .text-pretty  { text-wrap: pretty; }
 
-  .hairline    { border-color: rgb(var(--fg) / 0.08); }
+  .hairline    { border-color: rgb(var(--fg) / 0.1); }
   .ring-page   { --tw-ring-color: rgb(var(--bg)); }
 
+  /* Flat, bordered surface — no gradient sheen, no glow shadow. */
   .surface {
-    background: linear-gradient(
-      160deg,
-      rgb(var(--card) / 0.78) 0%,
-      rgb(var(--card) / 0.50) 100%
-    );
-    border: 1px solid rgb(var(--border) / 0.55);
-    box-shadow:
-      0 1px 0 rgb(255 255 255 / 0.02) inset,
-      0 12px 32px -16px rgb(2 8 20 / 0.4);
+    background: rgb(var(--card));
+    border: 1px solid rgb(var(--border) / 0.7);
   }
 
   .display {
     font-family: var(--font-serif), Georgia, serif;
-    letter-spacing: -0.02em;
-    line-height: 1.04;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+  }
+
+  .mono {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    letter-spacing: -0.01em;
   }
 
   .eyebrow {
-    @apply text-[11px] font-medium uppercase tracking-[0.18em];
+    @apply mono text-[11px] font-medium uppercase tracking-[0.16em];
     color: rgb(var(--muted));
+  }
+
+  /* Entry index numeral — e.g. "01", "02" — the recurring notebook motif. */
+  .entry-index {
+    @apply mono text-sm tabular-nums;
+    color: rgb(var(--accent));
+  }
+
+  /* Faint ruled-paper background for editorial sections. Extremely subtle. */
+  .ruled {
+    background-image: linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent calc(2rem - 1px),
+      rgb(var(--fg) / 0.035) calc(2rem - 1px),
+      rgb(var(--fg) / 0.035) 2rem
+    );
+    background-size: 100% 2rem;
   }
 }
 
-/* ---------- Animations ---------- */
-@keyframes marquee {
-  from { transform: translate3d(0,0,0); }
-  to   { transform: translate3d(-50%,0,0); }
-}
-.animate-marquee { animation: marquee 40s linear infinite; }
+/* ---------- Animations (restrained, meaningful only) ---------- */
 
 /* First-paint chrome fade — used for non-LCP UI (header, scroll-progress).
    Hero content is NEVER hidden — it must paint instantly for LCP. */
 @keyframes chrome-in {
-  from { opacity: 0; transform: translate3d(0, -4px, 0); }
-  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 .animate-chrome-in {
-  animation: chrome-in 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: chrome-in 380ms ease-out both;
 }
 
 /* Route transition — ultra-light cross-fade on pathname change. */
 @keyframes route-in {
-  from { opacity: 0; transform: translate3d(0, 6px, 0); }
-  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 .route-fade {
-  animation: route-in 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
-  will-change: opacity, transform;
+  animation: route-in 260ms ease-out both;
+  will-change: opacity;
 }
 
 /* Preloader sweep — used once at first paint of the session. */
@@ -125,7 +140,7 @@
 
 /* ---------- Microinteractions ---------- */
 
-/* Premium animated underline for inline links. */
+/* Underline that draws in on hover — communicates "this is a link", nothing more. */
 .link-underline {
   position: relative;
   display: inline-flex;
@@ -139,7 +154,7 @@
   background: currentColor;
   transform: scaleX(0);
   transform-origin: right center;
-  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 260ms ease-out;
 }
 .link-underline:hover::after,
 .link-underline:focus-visible::after {
@@ -147,43 +162,30 @@
   transform-origin: left center;
 }
 
-/* Subtle press feedback for primary buttons. */
+/* Subtle press feedback for buttons. */
 .btn-press {
   transition:
-    transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 180ms ease,
-    background-color 180ms ease,
-    border-color 180ms ease,
-    box-shadow 220ms ease;
+    transform 140ms ease-out,
+    opacity 140ms ease,
+    background-color 140ms ease,
+    border-color 140ms ease;
 }
 .btn-press:active { transform: translate3d(0, 1px, 0); }
-
-/* Card lift — GPU-only, no layout shift. */
-.lift {
-  transition:
-    transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 420ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 280ms ease;
-}
-.lift:hover {
-  transform: translate3d(0, -2px, 0);
-  box-shadow: 0 16px 40px -20px rgb(2 8 20 / 0.45);
-}
 
 /* ---------- Focus rings ---------- */
 *:focus-visible {
   outline: 2px solid rgb(var(--accent) / 0.7);
   outline-offset: 3px;
-  border-radius: 6px;
+  border-radius: 2px;
 }
 
 /* ---------- Reveal on scroll (stagger via inline CSS var) ---------- */
 .reveal {
   opacity: 0;
-  transform: translate3d(0, 14px, 0);
+  transform: translate3d(0, 10px, 0);
   transition:
-    opacity 680ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 760ms cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 520ms ease-out,
+    transform 520ms ease-out;
   transition-delay: var(--reveal-delay, 0ms);
   will-change: opacity, transform;
 }
@@ -212,5 +214,4 @@
     transform: none !important;
     animation: none !important;
   }
-  .lift:hover { transform: none !important; box-shadow: none !important; }
 }

@@ -6,8 +6,8 @@ const links = [
 
 export const Footer = () => {
   return (
-    <footer className="border-t border-line/60 py-10">
-      <div className="container flex flex-col gap-4 text-sm text-muted md:flex-row md:items-center md:justify-between">
+    <footer className="border-t border-line/70 py-10">
+      <div className="container flex flex-col gap-4 mono text-xs text-muted md:flex-row md:items-center md:justify-between">
         <p>
           © {new Date().getFullYear()} Chester Andaya · Lipa City, PH
         </p>
