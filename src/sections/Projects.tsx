@@ -122,18 +122,20 @@ export const ProjectsSection = () => {
                     <Link
                       href={`/work/${p.slug}`}
                       aria-label={`Open ${p.title} case study`}
-                      className={`group relative min-h-[260px] sm:min-h-[320px] overflow-hidden bg-subtle/80 border-line/70 lg:col-span-5 lg:min-h-full ${
+                      className={`group relative flex min-h-[260px] items-center justify-center overflow-hidden bg-subtle/60 p-5 border-line/70 sm:min-h-[320px] sm:p-8 lg:col-span-5 lg:min-h-full ${
                         i % 2 === 1 ? "lg:order-2 lg:border-l" : "lg:border-r"
                       }`}
                     >
-                      <Image
-                        src={p.image}
-                        alt={p.imageAlt}
-                        fill
-                        quality={90}
-                        sizes="(min-width: 1024px) 480px, 100vw"
-                        className="object-cover object-top grayscale-[15%] transition-[filter,transform] duration-300 group-hover:grayscale-0 group-hover:scale-[1.02]"
-                      />
+                      <div className="relative aspect-[800/507] w-full max-w-[440px]">
+                        <Image
+                          src={p.image}
+                          alt={p.imageAlt}
+                          fill
+                          quality={95}
+                          sizes="(min-width: 1024px) 480px, 100vw"
+                          className="object-contain drop-shadow-[0_10px_30px_rgb(0_0_0/0.25)] grayscale-[15%] transition-[filter,transform] duration-300 group-hover:grayscale-0 group-hover:scale-[1.02]"
+                        />
+                      </div>
                       {p.imageBadge && (
                         <div className="pointer-events-none absolute right-3 top-3">
                           <span className="mono inline-flex items-center gap-1.5 border border-line/70 bg-bg/85 px-2.5 py-1 text-[10px] uppercase tracking-[0.12em] text-muted">
