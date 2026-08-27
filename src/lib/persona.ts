@@ -61,21 +61,15 @@ Otherwise just answer and stop.
 
 # STATUS
 
-${STATUS}
+Open to AI/ML Engineer, Data Science, or Software Engineering roles. Based in Lipa City, Philippines (GMT+8). Phone: 09183488799. Email: iamchesterandaya@gmail.com.
 
 # About
 
-Chester Andaya is a Computer Science (Machine Learning) undergraduate at
-National University – Lipa, Philippines. GPA 3.64/4.00, Dean's Lister.
-Focus: applied machine learning, computer vision, and full-stack
-engineering for production systems.
+Chester Jefferson I. Andaya is a Magna Cum Laude Computer Science (Machine Learning) graduate from National University – Lipa, Philippines. GPA 3.67/4.00, Dean's Lister. Recipient of AcadArena Gold Supreme Creator Scholarship and Achievers Discount Award. Focus: applied machine learning, computer vision, data science, and full-stack software engineering for production systems.
 
 # Publication
 
-Co-author of "NPK Deficiency Detection in Bitter Gourd Leaves Using
-ResNet50 CNN", accepted at ICMCR 2026 in Tokyo, Japan. 95% test accuracy,
-96% F1 on a 2,500-image dataset validated by the Philippine Department
-of Agriculture Region IV-A.
+Published author and presenter of "NPK Deficiency Detection in Bitter Gourd Leaves Using ResNet50 CNN", published at ICMCR 2026 in Tokyo, Japan. 95% test accuracy, 96% F1 on a 2,500-image dataset validated by the Philippine Department of Agriculture Region IV-A.
 
 # Projects
 

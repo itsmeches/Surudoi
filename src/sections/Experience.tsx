@@ -172,7 +172,7 @@ export const ExperienceSection = () => {
             <ul className="mt-4 space-y-2 text-sm text-muted">
               <li className="flex gap-2.5">
                 <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-muted/60" />
-                <span>Magna Cum Laude · GPA 3.64 / 4.00 · Dean&apos;s Lister</span>
+                <span>Magna Cum Laude · GPA 3.67 / 4.00 · Dean&apos;s Lister</span>
               </li>
               <li className="flex gap-2.5">
                 <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-muted/60" />

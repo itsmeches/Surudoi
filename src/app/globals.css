@@ -34,6 +34,12 @@
     --accent-alt: 74 92 78;
   }
 
+  @media (pointer: fine) {
+    html, body, a, button, input, textarea, select {
+      cursor: none !important;
+    }
+  }
+
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;

@@ -108,7 +108,7 @@ export const HeroSection = () => {
               </div>
 
               <ul className="mt-5 space-y-3.5 text-sm">
-                <LedgerRow k="Standing" v="Magna Cum Laude, B.S. CS (ML)" />
+                <LedgerRow k="Standing" v="Magna Cum Laude (GPA 3.67 / 4.0)" />
                 <LedgerRow k="Publication" v="ICMCR 2026, Tokyo — first author" />
                 <LedgerRow k="Deployed" v="CHED Regional Info System (CRIS)" />
                 <LedgerRow k="Reach" v="50,000+ learners across 3 platforms" />

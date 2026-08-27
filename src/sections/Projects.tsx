@@ -118,11 +118,11 @@ export const ProjectsSection = () => {
             return (
               <Reveal as="li" key={p.slug} delay={Math.min(i * 80, 160)}>
                 <article className="border border-line/70">
-                  <div className="grid gap-0 lg:grid-cols-12">
+                  <div className="grid gap-0 lg:grid-cols-12 lg:items-stretch">
                     <Link
                       href={`/work/${p.slug}`}
                       aria-label={`Open ${p.title} case study`}
-                      className={`group relative block aspect-[16/10] overflow-hidden bg-subtle/80 border-line/70 lg:col-span-5 lg:aspect-[4/3] ${
+                      className={`group relative min-h-[260px] sm:min-h-[320px] overflow-hidden bg-subtle/80 border-line/70 lg:col-span-5 lg:min-h-full ${
                         i % 2 === 1 ? "lg:order-2 lg:border-l" : "lg:border-r"
                       }`}
                     >

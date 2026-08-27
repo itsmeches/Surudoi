@@ -27,7 +27,7 @@ import {
 
 const SUGGESTIONS = [
   "What's Chester's strongest project?",
-  "Is he available for internships?",
+  "Is he available for engineering roles?",
   "What ML stack does he use?",
 ];
 
@@ -123,11 +123,17 @@ export const ChatWidget = () => {
 
   const renderedMessages = useMemo(
     () =>
-      messages.map((m) => ({
-        id: m.id,
-        role: m.role,
-        text: extractText((m as { parts?: unknown }).parts),
-      })),
+      messages.map((m) => {
+        let text = extractText((m as { parts?: unknown }).parts);
+        if (!text && typeof (m as { content?: unknown }).content === "string") {
+          text = (m as { content: string }).content;
+        }
+        return {
+          id: m.id,
+          role: m.role,
+          text,
+        };
+      }),
     [messages]
   );
 
