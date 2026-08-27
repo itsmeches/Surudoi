@@ -1,10 +1,17 @@
-# Portfolio – Chester "Surudoi" Andaya
+# Chester Andaya Portfolio
 
-This is a [Next.js](https://nextjs.org/) portfolio website built with TypeScript and Tailwind CSS, showcasing my work, skills, and projects in Machine Learning and Computer Science.
+Personal portfolio built with Next.js, TypeScript, and Tailwind CSS.
 
----
+The site is optimized for recruiter scanability with measurable project outcomes, concise case studies, and clean information hierarchy.
 
-## 🚀 Getting Started
+## Stack
+
+- Next.js 14
+- React 18
+- TypeScript
+- Tailwind CSS
+
+## Local Development
 
 Install dependencies:
 
@@ -12,60 +19,27 @@ Install dependencies:
 npm install
 ```
 
-Run the development server:
+Start development server:
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to view your site.
+Build for production:
 
----
+```bash
+npm run build
+```
 
-## 🛠️ Tech Stack
+Lint:
 
-- **Framework:** [Next.js](https://nextjs.org/)
-- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-- **Animation:** [Framer Motion](https://www.framer.com/motion/)
-- **TypeScript** for type safety
-- **Optimized Fonts:** [`next/font`](https://nextjs.org/docs/basic-features/font-optimization)
+```bash
+npm run lint
+```
 
----
+## Project Structure
 
-## 📁 Project Structure
-
-- `src/components/` – Reusable UI components
-- `src/sections/` – Page sections (e.g., Hero, Projects)
-- `public/assets/` – Images and icons
-
----
-
-## ✏️ Editing
-
-Start editing by modifying files in `src/sections/` or `src/components/`. Changes are reflected automatically.
-
----
-
-## 📚 Learn More
-
-- [Next.js Documentation](https://nextjs.org/docs)
-- [Tailwind CSS Docs](https://tailwindcss.com/docs)
-- [Framer Motion Docs](https://www.framer.com/motion/)
-
----
-
-## 🚢 Deploy
-
-Deploy easily on [Vercel](https://vercel.com/) (recommended for Next.js):
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)
-
-See [Next.js deployment docs](https://nextjs.org/docs/deployment) for more options.
-
----
-
-## 👤 About
-
-Crafted by Chester "Surudoi" Andaya – I see patterns others miss.
-
----
+- src/app: App shell, metadata, and global styles
+- src/sections: Main page sections (Hero, About, Experience, Projects, Contact)
+- src/components: Reusable UI behavior and primitives
+- public: Static assets and resume

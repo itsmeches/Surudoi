@@ -1,257 +1,191 @@
-"use client";
-import me from '@/assets/images/me.png';
-import Image from 'next/image';
-import ArrowDown from '@/assets/icons/arrow-down.svg';
-import Download from '@/assets/icons/download.svg';
-import grainImage from "@/assets/images/grain.jpg";
-import StarIcon from '@/assets/icons/star.svg';
-import SparkleIcon from '@/assets/icons/sparkle.svg';
-import { HeroOrbit } from '@/components/heroOrbit';
-import React from 'react';
-import { motion } from 'framer-motion';
- 
+import Image from "next/image";
+import Link from "next/link";
+import me from "@/assets/images/me.png";
+import { Magnetic } from "@/components/Magnetic";
+
 export const HeroSection = () => {
-  const [showDefinition, setShowDefinition] = React.useState(false);
- 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  };
- 
   return (
-    <motion.div
+    <section
       id="home"
-      className="py-32 md:py-48 lg:py-60 relative z-0 overflow-x-clip"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 2.5, duration: 1 }}
+      className="relative isolate overflow-hidden pt-36 pb-24 md:pt-44 md:pb-32"
     >
-      {/* Top Gradient Glow */}
-      <div className="absolute h-[500px] w-full left-0 right-0 top-0 bg-emerald-300/15 [mask-image:radial-gradient(50%_80%_at_top_center,black,transparent)] -z-20 pointer-events-none"></div>
- 
-      {/* Background grain + orbiting elements */}
-      <div className='absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_75%,transparent)]'>
-        <div className="absolute inset-0 -z-30 opacity-5" style={{ backgroundImage: `url(${grainImage.src})` }}></div>
- 
-        {/* Precision rings */}
-        <div className='size-[620px] hero-ring'></div>
-        <div className='size-[820px] hero-ring'></div>
-        <div className='size-[1020px] hero-ring'></div>
-        <div className='size-[1220px] hero-ring'></div>
- 
-        {/* Orbiting elements */}
-        <HeroOrbit size={430} rotation={-14} shouldOrbit orbitDuration="30s" shouldSpin spinDuration="3s">
-          <SparkleIcon className="size-8 text-emerald-300/20 animate-pulse-subtle" />
-        </HeroOrbit>
-        <HeroOrbit size={440} rotation={79} shouldOrbit orbitDuration="32s" shouldSpin spinDuration="3s">
-          <SparkleIcon className="size-5 text-emerald-300/20 animate-pulse-subtle" />
-        </HeroOrbit>
-        <HeroOrbit size={520} rotation={-41} shouldOrbit orbitDuration="34s">
-          <div className="size-2 rounded-full bg-emerald-300/20 animate-twinkle" />
-        </HeroOrbit>
-        <HeroOrbit size={530} rotation={178} shouldOrbit orbitDuration="36s" shouldSpin spinDuration="3s">
-          <SparkleIcon className="size-10 text-emerald-300/20 animate-pulse-subtle" />
-        </HeroOrbit>
-        <HeroOrbit size={550} rotation={20} shouldOrbit orbitDuration="38s" shouldSpin spinDuration="6s">
-          <StarIcon className="size-12 text-emerald-300 drop-shadow-[0_0_8px_rgba(16,185,129,0.6)] animate-glow" />
-        </HeroOrbit>
-        <HeroOrbit size={590} rotation={98} shouldOrbit orbitDuration="40s" shouldSpin spinDuration="6s">
-          <StarIcon className="size-8 text-emerald-300 drop-shadow-[0_0_6px_rgba(16,185,129,0.5)] animate-glow" />
-        </HeroOrbit>
-        <HeroOrbit size={650} rotation={-5} shouldOrbit orbitDuration="42s">
-          <div className="size-2 rounded-full bg-emerald-300/20 animate-twinkle" />
-        </HeroOrbit>
-        <HeroOrbit size={720} rotation={-72} shouldOrbit orbitDuration="50s" shouldSpin spinDuration="4s">
-          <SparkleIcon className="size-6 text-emerald-300/15 animate-pulse-subtle" />
-        </HeroOrbit>
-        <HeroOrbit size={800} rotation={145} shouldOrbit orbitDuration="55s">
-          <div className="size-3 rounded-full bg-emerald-300/10 animate-twinkle" />
-        </HeroOrbit>
-      </div>
- 
-      {/* Layer 2: Additional depth */}
-      <div className="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_80%,transparent)]">
-        <HeroOrbit size={500} rotation={-20} shouldOrbit orbitDuration="40s" shouldSpin spinDuration="3s">
-          <SparkleIcon className="size-6 text-emerald-300/30 animate-pulse-subtle" />
-        </HeroOrbit>
-        <HeroOrbit size={600} rotation={45} shouldOrbit orbitDuration="44s" shouldSpin spinDuration="6s">
-          <StarIcon className="size-10 text-emerald-300/20 drop-shadow-[0_0_6px_rgba(16,185,129,0.4)] animate-glow" />
-        </HeroOrbit>
-        <HeroOrbit size={710} rotation={-30} shouldOrbit orbitDuration="46s">
-          <div className="size-3 rounded-full bg-emerald-300/10 animate-twinkle" />
-        </HeroOrbit>
-        <HeroOrbit size={780} rotation={120} shouldOrbit orbitDuration="52s" shouldSpin spinDuration="4s">
-          <SparkleIcon className="size-7 text-emerald-300/25 animate-pulse-subtle" />
-        </HeroOrbit>
-        <HeroOrbit size={850} rotation={-95} shouldOrbit orbitDuration="58s">
-          <div className="size-2 rounded-full bg-emerald-300/15 animate-twinkle" />
-        </HeroOrbit>
-      </div>
- 
-      {/* Center content */}
-      <div className="container flex flex-col items-center z-30 relative">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 3.5, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="flex flex-col items-center text-center"
-        >
-          {/* Profile Image */}
-          <motion.div
-            className="relative"
-            initial={{ y: -30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 3.6, duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <div className="relative group">
-              <Image
-                src={me}
-                className="size-[120px] md:size-[140px] rounded-full border-2 border-emerald-400/40 shadow-[0_0_30px_rgba(16,185,129,0.15)] transition-all duration-500 group-hover:scale-105 group-hover:shadow-[0_0_40px_rgba(16,185,129,0.25)]"
-                alt="Chester 'Surudoi' Andaya"
-                priority
-              />
-              <div className="absolute -inset-2 rounded-full bg-gradient-to-r from-emerald-400/20 to-emerald-300/10 blur-lg opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="absolute inset-0 rounded-full border-2 border-emerald-400/30 animate-ping-slow" />
-              <div className="absolute -inset-1 rounded-full border border-emerald-400/20" />
+      {/* Ambient backdrop — three layers, all decorative, all -z-10. */}
+
+      {/* 1. Soft accent orbs (the colour you actually feel) */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-40 -left-40 -z-10 h-[560px] w-[560px] rounded-full opacity-70 blur-3xl"
+        style={{
+          background:
+            "radial-gradient(closest-side, rgb(var(--accent) / 0.18), transparent 70%)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-32 right-[-12rem] -z-10 h-[500px] w-[500px] rounded-full opacity-60 blur-3xl"
+        style={{
+          background:
+            "radial-gradient(closest-side, rgb(var(--accent-alt) / 0.14), transparent 70%)",
+        }}
+      />
+
+      {/* 2. Dot grid (premium signature — Linear / Vercel style),
+            masked so it fades out before reaching the copy + bottom */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.55]"
+        style={{
+          backgroundImage:
+            "radial-gradient(rgb(var(--fg) / 0.07) 1px, transparent 1px)",
+          backgroundSize: "26px 26px",
+          maskImage:
+            "radial-gradient(120% 80% at 50% 0%, #000 35%, transparent 80%)",
+          WebkitMaskImage:
+            "radial-gradient(120% 80% at 50% 0%, #000 35%, transparent 80%)",
+        }}
+      />
+
+      {/* 3. Section-end hairline — ties hero to the next section */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-px bg-gradient-to-r from-transparent via-line/70 to-transparent"
+      />
+
+      <div className="container">
+        <div className="grid gap-14 lg:grid-cols-12 lg:items-start">
+          {/* LEFT — value prop */}
+          <div className="flex flex-col gap-8 lg:col-span-8">
+            <div className="inline-flex w-fit items-center gap-2 rounded-full border border-line/70 bg-card/40 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-muted backdrop-blur">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-accent opacity-60 animate-ping" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
+              </span>
+              <span className="text-fg">Paper accepted</span>
+              <span className="text-muted/60">·</span>
+              <span>ICMCR 2026 · Tokyo</span>
             </div>
-          </motion.div>
- 
-          {/* Status Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 3.7, duration: 0.6 }}
-            className="mt-8 inline-flex items-center gap-2.5 border border-emerald-400/20 bg-emerald-950/30 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg"
-          >
-            <div className="relative flex items-center justify-center">
-              <div className="size-2 rounded-full bg-emerald-400 animate-pulse" />
-              <div className="absolute size-2 rounded-full bg-emerald-400 animate-ping" />
-            </div>
-            <span className="text-sm text-emerald-300/90 font-medium">Open to opportunities</span>
-          </motion.div>
- 
-          {/* Headline */}
-          <motion.h1
-            className="mt-8 text-4xl md:text-5xl lg:text-6xl font-serif tracking-wide leading-tight relative"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 3.8, duration: 0.8 }}
-          >
-            Hi, I&apos;m{" "}
-            <span className="text-emerald-400 font-bold">
-              Chester{" "}
- 
-              {/* "Surudoi" with shimmer underline — class lives in globals.css */}
-              <span
-                className="surudoi-shimmer inline-block cursor-pointer hover:text-emerald-300 transition-colors"
-                tabIndex={0}
-                aria-label="Show definition of Surudoi"
-                onMouseEnter={() => setShowDefinition(true)}
-                onMouseLeave={() => setShowDefinition(false)}
-                onFocus={() => setShowDefinition(true)}
-                onBlur={() => setShowDefinition(false)}
-                role="button"
-              >
-                &quot;Surudoi&quot;
- 
-                {/* Tooltip */}
-                {showDefinition && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    transition={{ duration: 0.3 }}
-                    className="absolute left-1/2 -translate-x-1/2 bottom-full mb-3 bg-gray-800/90 text-white text-sm px-4 py-2 rounded-lg shadow-lg w-64 z-50"
-                    role="tooltip"
-                  >
-                    <p className="text-emerald-300 font-semibold mb-1">&quot;Surudoi&quot; (鋭い)</p>
-                    <p className="text-white/80 mb-2">
-                      A Japanese word meaning &quot;sharp,&quot; &quot;keen,&quot; or &quot;perceptive.&quot;<br />
-                      Reflects awareness and analytical clarity.
-                    </p>
-                    <p className="italic text-emerald-300/80">&quot;I see patterns others miss.&quot;</p>
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 -translate-y-1 w-3 h-3 bg-gray-800/90 rotate-45" />
-                  </motion.div>
-                )}
-              </span>{" "}
- 
-              Andaya
-            </span>
-          </motion.h1>
- 
-          {/* Tagline */}
-          <motion.div
-            className="mt-6 flex flex-col items-center gap-3"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 3.9, duration: 0.8 }}
-          >
-            <p className="text-emerald-400/90 text-lg md:text-xl font-medium tracking-wide">
-              Sharp mind. Focused solutions.
+
+            <h1 className="display font-serif text-balance text-[2.5rem] leading-[1.02] sm:text-[3.25rem] md:text-[4rem] lg:text-[4.5rem] tracking-[-0.025em] max-w-[14ch]">
+              Machine learning systems,
+              <br />
+              <span className="text-muted">shipped to real users.</span>
+            </h1>
+
+            <p className="max-w-xl text-[15px] md:text-[17px] leading-relaxed text-muted">
+              I&apos;m Chester — a Computer Science (Machine Learning)
+              undergraduate at National University&nbsp;– Lipa. I build computer
+              vision and full-stack systems end-to-end with PyTorch, React, and
+              Django, and recently co-authored a paper accepted at
+              ICMCR&nbsp;2026 in Tokyo.
             </p>
-            <div className="w-16 h-px bg-gradient-to-r from-transparent via-emerald-400/50 to-transparent" />
-          </motion.div>
- 
-          {/* Professional Description */}
-          <motion.p
-            className="mt-6 max-w-2xl text-white/60 md:text-lg leading-relaxed"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 4.0, duration: 0.8 }}
-          >
-            A Computer Science student specializing in{" "}
-            <span className="text-emerald-400/90 font-semibold">Machine Learning</span>.<br className="hidden md:block" />
-            I build smart solutions with precision, persistence, and a sharp eye for detail.
-          </motion.p>
- 
-          {/* CTA Buttons */}
-          <motion.div
-            className="flex flex-col md:flex-row justify-center items-center mt-10 gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 4.1, duration: 0.6 }}
-          >
-            <button
-              className="group inline-flex items-center gap-2 border border-white/15 px-6 h-12 rounded-xl hover:bg-white/10 hover:border-white/30 transition-all duration-300 hover:scale-105 active:scale-95"
-              onClick={() => scrollToSection("projects")}
-              aria-label="View my projects"
-            >
-              <span className="font-semibold">View My Work</span>
-              <ArrowDown className="size-4 group-hover:translate-y-1 transition-transform" />
-            </button>
- 
-            <a
-              href="/cv.pdf"
-              download="Chester-Andaya-CV.pdf"
-              className="group inline-flex items-center gap-2 border border-emerald-400 bg-emerald-400 text-gray-900 h-12 px-6 rounded-xl hover:bg-emerald-300 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all duration-300 hover:scale-105 active:scale-95 font-semibold"
-              aria-label="Download resume"
-            >
-              <span className="font-semibold">Download CV</span>
-              <Download className="size-4 group-hover:translate-y-1 transition-transform" />
-            </a>
-          </motion.div>
- 
-          {/* Scroll Indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 4.2, duration: 0.6 }}
-            className="mt-16 hidden md:block"
-          >
-            <div className="flex flex-col items-center gap-2 text-white/40">
-              <span className="text-xs uppercase tracking-wider">Scroll to explore</span>
-              <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+
+            <div className="flex flex-wrap items-center gap-3 pt-1">
+              <Magnetic strength={5}>
+                <Link
+                  href="#projects"
+                  className="btn-press group inline-flex h-11 items-center rounded-full bg-fg px-5 text-sm font-medium text-bg hover:opacity-90"
+                >
+                  See selected work
+                  <svg
+                    className="ml-2 h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-1"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M5 12h14M13 6l6 6-6 6" />
+                  </svg>
+                </Link>
+              </Magnetic>
+              <a
+                href="/cv.pdf"
+                download="Chester-Andaya-CV.pdf"
+                className="btn-press inline-flex h-11 items-center rounded-full border border-line/70 px-5 text-sm font-medium text-fg hover:border-fg/50"
               >
-                <ArrowDown className="size-4" />
-              </motion.div>
+                Download CV
+              </a>
+              <a
+                href="mailto:iamchesterandaya@gmail.com?subject=Opportunity"
+                className="link-underline inline-flex h-11 items-center text-sm font-medium text-muted transition-colors hover:text-fg"
+              >
+                iamchesterandaya@gmail.com →
+              </a>
             </div>
-          </motion.div>
-        </motion.div>
+
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-3 pt-6 text-sm text-muted">
+              <div className="flex items-center gap-3">
+                <div className="relative h-9 w-9 overflow-hidden rounded-full border border-line/70">
+                  <Image src={me} alt="Chester Andaya" fill sizes="36px" priority />
+                </div>
+                <span className="text-fg">Chester Andaya</span>
+              </div>
+              <span className="h-1 w-1 rounded-full bg-line" />
+              <span>Lipa City, Philippines · GMT+8</span>
+              <span className="h-1 w-1 rounded-full bg-line" />
+              <a
+                href="https://github.com/itsmeches"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-fg"
+              >
+                GitHub
+              </a>
+              <a
+                href="https://www.linkedin.com/in/chester-andaya-8bba4a1b9"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-fg"
+              >
+                LinkedIn
+              </a>
+            </div>
+          </div>
+
+          {/* RIGHT — Now card + highlights */}
+          <aside className="flex flex-col gap-5 lg:col-span-4 lg:pt-2">
+            <div className="surface rounded-2xl p-6">
+              <div className="flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                <div className="eyebrow">Currently</div>
+              </div>
+
+              <ul className="mt-6 space-y-5 text-sm">
+                <NowRow k="Building" v="CHED CRIS features + ML research tooling" />
+                <NowRow k="Studying" v="Deep Learning, Reinforcement Learning, MLOps" />
+                <NowRow k="Open to" v="ML / SWE internships and entry-level roles" />
+                <NowRow k="Strongest in" v="Computer Vision · PyTorch · React / Django" />
+              </ul>
+            </div>
+
+            <div className="surface rounded-2xl p-6">
+              <div className="flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-accent-alt" />
+                <div className="eyebrow">By the numbers</div>
+              </div>
+
+              <dl className="mt-6 grid grid-cols-3 gap-4">
+                <Stat metric="3.64" label="GPA" />
+                <Stat metric="4" label="systems shipped" />
+                <Stat metric="50K+" label="community reach" />
+              </dl>
+            </div>
+          </aside>
+        </div>
       </div>
-    </motion.div>
+    </section>
   );
 };
+
+const NowRow = ({ k, v }: { k: string; v: string }) => (
+  <li className="grid grid-cols-[5.5rem_1fr] items-baseline gap-3">
+    <span className="text-[11px] uppercase tracking-[0.16em] text-muted">{k}</span>
+    <span className="text-fg/90 leading-snug">{v}</span>
+  </li>
+);
+
+const Stat = ({ metric, label }: { metric: string; label: string }) => (
+  <div>
+    <dt className="text-[10px] uppercase tracking-[0.14em] text-muted">{label}</dt>
+    <dd className="display mt-1 font-serif text-xl text-fg md:text-[1.4rem]">{metric}</dd>
+  </div>
+);

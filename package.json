@@ -3,28 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "predev": "node scripts/clean-next-cache.mjs",
+    "dev": "node scripts/next-runner.mjs dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@react-three/fiber": "^8.18.0",
+    "@ai-sdk/groq": "^3.0.39",
+    "@ai-sdk/react": "^3.0.193",
     "@svgr/webpack": "^8.1.0",
-    "@types/three": "^0.181.0",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "framer-motion": "^11.3.21",
-    "lucide-react": "^0.554.0",
+    "ai": "^6.0.191",
     "next": "^14.2.16",
-    "next.js": "^1.0.3",
     "react": "^18",
     "react-dom": "^18",
-    "react-shaders": "^0.0.4",
     "sharp": "^0.33.5",
-    "tailwind-merge": "^2.6.0",
-    "tailwindcss-animate": "^1.0.7",
-    "three": "^0.181.2"
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/node": "^20",

@@ -1,154 +1,241 @@
-import Image from 'next/image';
+import Image, { type StaticImageData } from "next/image";
+import Link from "next/link";
+import { SectionHeader } from "@/components/SectionHeader";
+import { Reveal } from "@/components/Reveal";
+
 import Ampalaya from "@/assets/images/Ampalaya.png";
 import Smart from "@/assets/images/Smart Admission.png";
-import Inventory from "@/assets/images/Inventory system.png";
 import Coffee from "@/assets/images/Liberica.png";
-import PPT from "@/assets/images/ppt.png";
-import CheckCircleIcon from "@/assets/icons/check-circle.svg";
-import ArrowUpRightIcon from '@/assets/icons/arrow-up-right.svg';
-import GithubIcon from '@/assets/icons/github.svg';
-import { SectionHeader } from '@/components/SectionHeader';
-import { Card } from '@/components/Card';
+import Inventory from "@/assets/images/Inventory system.png";
 
-const portfolioProjects = [
+type Project = {
+  slug: string;
+  year: string;
+  org: string;
+  title: string;
+  role: string;
+  summary: string;
+  impact: { metric: string; label: string }[];
+  stack: string[];
+  image: StaticImageData;
+  /** Show a "Featured · …" pill above the title. */
+  feature?: string;
+  /** Render a corner badge on the preview image (e.g. for stock/illustrative
+   *  visuals when the real product is internal / under NDA). */
+  imageBadge?: string;
+};
+
+const projects: Project[] = [
   {
-    company: "Department of Agriculture",
-    year: "2024",
-    title: "AI-Powered Leaf & Soil Nutrient Analysis System",
-    results: [
-      { title: "Improved NPK diagnostic accuracy by 87% using CNN models" },
-      { title: "Reduced manual soil analysis time by 65%" },
-      { title: "Increased user engagement by 42% through optimized UI/UX" },
+    slug: "npk-deficiency-detection",
+    year: "2026",
+    org: "ICMCR 2026 · DA Region IV-A",
+    title: "NPK Deficiency Detection in Bitter Gourd Leaves",
+    role: "ML Engineer · Researcher",
+    summary:
+      "A published computer-vision system that classifies four nutrient-deficiency states from a single leaf photo and exposes the prediction through an explainable inference UI agronomists can audit.",
+    impact: [
+      { metric: "95%", label: "test accuracy" },
+      { metric: "96%", label: "F1-score" },
+      { metric: "2,500", label: "validated images" },
     ],
-    link: "https://npknows.vercel.app/",
-    isGithub: false,
+    stack: ["PyTorch", "ResNet50", "OpenCV", "GradCAM", "React", "Django"],
     image: Ampalaya,
+    feature: "Published research · ICMCR 2026 Tokyo",
   },
   {
-    company: "National University - Lipa",
-    year: "2025",
-    title: "Smart Admission & Applicant Management System",
-    results: [
-      { title: "Digitized end-to-end admissions flow for 500+ applicants" },
-      { title: "Reduced manual processing time by 55% vs paper-based system" },
-      { title: "Improved data accuracy and staff efficiency by 48%" },
+    slug: "enrollment-probability-prediction",
+    year: "2026",
+    org: "National University — Lipa",
+    title: "Enrollment Probability Prediction System",
+    role: "ML Engineer · Full-Stack Developer",
+    summary:
+      "An admissions analytics platform that predicts per-applicant enrollment probability and surfaces cohort-level explanations so administrators can plan capacity instead of guessing it.",
+    impact: [
+      { metric: "92.67%", label: "prediction accuracy" },
+      { metric: "+9.6pts", label: "uplift over baseline" },
+      { metric: "20K+", label: "records modeled" },
     ],
-    link: "https://github.com/itzjmbruhhh/NU_Admission",
-    isGithub: true,
+    stack: ["Scikit-learn", "Random Forest", "KNN", "Flask", "React"],
     image: Smart,
   },
   {
-    company: "Department of Agriculture",
+    slug: "barako-sense",
     year: "2026",
-    title: "BarakoSenser: AI-Based Coffee Authenticity Classifier",
-    results: [
-      { title: "Achieved 91% classification accuracy for Coffee Liberica" },
-      { title: "Reduced authentication time by 70% using ML inference" },
-      { title: "Improved detection consistency by 60% vs manual inspection" },
+    org: "DLSU Manila · UPLB · Batangas State University",
+    title: "Barako Sense — Liberica Coffee Tree Identification",
+    role: "ML Engineer · Research Collaborator",
+    summary:
+      "A cross-institutional AI platform that fuses leaf imagery with sensory tasting records to identify Liberica coffee trees and profile their flavour signatures from a multi-input CNN.",
+    impact: [
+      { metric: "95%", label: "identification accuracy" },
+      { metric: "4,000+", label: "images, 5 DNA-verified trees" },
+      { metric: "100+", label: "sensory records fused" },
     ],
-    link: "https://barakosense-484055099685.asia-southeast1.run.app/",
-    isGithub: false,
+    stack: ["MobileNetV2", "Multi-Input CNN", "OpenCV", "Django", "React"],
     image: Coffee,
   },
   {
-    company: "3 Brother Store",
-    year: "2024",
-    title: "Automated Inventory Management System with Barcode Integration",
-    results: [
-      { title: "Reduced inventory tracking errors by 68%" },
-      { title: "Improved stock monitoring efficiency by 57%" },
-      { title: "Accelerated transaction processing time by 45%" },
+    slug: "ched-cris",
+    year: "2026",
+    org: "CHED Regional Office IV-A",
+    title: "CHED Regional Information System (CRIS)",
+    role: "Full-Stack Developer Intern",
+    summary:
+      "Production internal platform used by the Commission on Higher Education to manage regional reporting workflows. I ship UI and API improvements against real institutional data, on a real release cadence.",
+    impact: [
+      { metric: "Live", label: "government deployment" },
+      { metric: "Full stack", label: "React + Laravel + SQL" },
+      { metric: "Ship", label: "review · merge · deploy" },
     ],
-    link: "https://github.com/itsmeches/Inventory-System_PHP",
-    isGithub: true,
+    stack: ["React", "Laravel", "REST APIs", "SQL"],
     image: Inventory,
-  },
-  {
-    company: "Personal Project",
-    year: "2023",
-    title: "AI-Powered PPT-to-Reviewer Content Generator",
-    results: [
-      { title: "Reduced study material prep time by 75% per session" },
-      { title: "Adopted by 100+ students for automated reviewer generation" },
-      { title: "Improved content comprehension scores by 50% in user testing" },
-    ],
-    link: "https://github.com/itsmeches/PPT-to-TRANSES",
-    isGithub: true,
-    image: PPT,
+    imageBadge: "Internal product · illustrative preview",
   },
 ];
 
 export const ProjectsSection = () => {
   return (
-    <section id="projects" className="pb-16 lg:py-24">
+    <section
+      id="projects"
+      className="relative isolate overflow-hidden border-t hairline py-24 md:py-32"
+    >
+      {/* Ambient backdrop — softer than hero, but breaks the flat-black slab */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-32 left-1/2 -z-10 h-[420px] w-[760px] -translate-x-1/2 rounded-full opacity-60 blur-3xl"
+        style={{
+          background:
+            "radial-gradient(closest-side, rgb(var(--accent) / 0.10), transparent 70%)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.45]"
+        style={{
+          backgroundImage:
+            "radial-gradient(rgb(var(--fg) / 0.05) 1px, transparent 1px)",
+          backgroundSize: "26px 26px",
+          maskImage:
+            "radial-gradient(120% 60% at 50% 0%, #000 25%, transparent 75%)",
+          WebkitMaskImage:
+            "radial-gradient(120% 60% at 50% 0%, #000 25%, transparent 75%)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-px bg-gradient-to-r from-transparent via-line/60 to-transparent"
+      />
+
       <div className="container">
         <SectionHeader
-          eyebrow="Real-world Results"
-          title="Featured Projects"
-          description="See how I transformed concepts into engaging digital experiences."
+          eyebrow="Selected work"
+          title="Four systems, shipped end-to-end."
+          description="Research, analytics, and government engineering — each with measurable outcomes, real users, and decisions I can defend."
         />
 
-        <div className="mt-10 md:mt-20 flex flex-col gap-20">
-          {portfolioProjects.map((project, projectIndex) => (
-            <Card
-              key={project.title}
-              className="px-8 pt-8 pb-0 md:pt-12 md:px-10 lg:pt-16 lg:px-20 sticky"
-              style={{ top: `calc(64px + ${projectIndex * 20}px)` }}
-            >
-              <div className="lg:grid lg:grid-cols-2 lg:gap-16">
-                <div className="lg:pb-16">
-                  <div className="bg-gradient-to-r from-emerald-300 to-sky-400 inline-flex gap-2 font-bold uppercase tracking-widest text-sm text-transparent bg-clip-text">
-                    <span>{project.company}</span>
-                    <span>&bull;</span>
-                    <span>{project.year}</span>
+        <ul className="mt-20 space-y-24">
+          {projects.map((p, i) => (
+            <Reveal as="li" key={p.slug} delay={Math.min(i * 80, 240)}>
+              <article className="grid gap-10 lg:grid-cols-12 lg:items-center">
+                {/* Visual */}
+                <Link
+                  href={`/work/${p.slug}`}
+                  aria-label={`Open ${p.title} case study`}
+                  className={`group block lg:col-span-7 ${
+                    i % 2 === 1 ? "lg:order-2" : ""
+                  }`}
+                >
+                  <div className="lift relative aspect-[16/10] overflow-hidden rounded-2xl border border-line/70 bg-subtle">
+                    <Image
+                      src={p.image}
+                      alt={p.title}
+                      fill
+                      sizes="(min-width: 1024px) 640px, (min-width: 640px) 80vw, 100vw"
+                      className="object-cover transition-transform duration-[700ms] ease-out group-hover:scale-[1.025]"
+                    />
+                    <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-fg/5" />
+
+                    {p.imageBadge && (
+                      <div className="pointer-events-none absolute right-3 top-3">
+                        <span className="inline-flex items-center gap-1.5 rounded-full border border-line/70 bg-bg/80 px-2.5 py-1 text-[10px] uppercase tracking-[0.16em] text-muted backdrop-blur">
+                          <span className="h-1 w-1 rounded-full bg-accent" />
+                          {p.imageBadge}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </Link>
+
+                {/* Copy */}
+                <div
+                  className={`lg:col-span-5 ${
+                    i % 2 === 1 ? "lg:order-1" : ""
+                  }`}
+                >
+                  {p.feature && (
+                    <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/[0.08] px-3 py-1 text-[10.5px] font-medium uppercase tracking-[0.18em] text-accent">
+                      <span className="relative flex h-1.5 w-1.5">
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
+                        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
+                      </span>
+                      Featured · {p.feature}
+                    </div>
+                  )}
+
+                  <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[11px] uppercase tracking-[0.18em] text-muted">
+                    <span className="tabular-nums text-fg/70">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="text-muted/50">/</span>
+                    <span>{p.year}</span>
+                    <span className="text-muted/50">·</span>
+                    <span>{p.org}</span>
                   </div>
 
-                  <h3 className="font-serif text-2xl mt-2 md:mb-5 md:text-4xl">
-                    {project.title}
+                  <h3 className="display mt-4 font-serif text-[1.75rem] leading-[1.1] md:text-[2rem]">
+                    {p.title}
                   </h3>
 
-                  <hr className="border-t-2 border-white/5 mt-4 md:mt-5" />
+                  <p className="mt-2 text-[11px] uppercase tracking-[0.16em] text-muted">
+                    {p.role}
+                  </p>
 
-                  <ul className="flex flex-col gap-4 mt-4 md:mt-5">
-                    {project.results.map((result) => (
-                      <li
-                        className="flex gap-2 text-sm md:text-base text-white/50"
-                        key={result.title}
-                      >
-                        <CheckCircleIcon className="size-5 md:size-6 flex-shrink-0" />
-                        <span>{result.title}</span>
-                      </li>
+                  <p className="mt-5 text-[15px] leading-relaxed text-muted">
+                    {p.summary}
+                  </p>
+
+                  <dl className="mt-6 grid grid-cols-3 gap-4 border-y border-line/60 py-5">
+                    {p.impact.map((m) => (
+                      <div key={m.label}>
+                        <dt className="text-[10px] uppercase tracking-[0.16em] text-muted">
+                          {m.label}
+                        </dt>
+                        <dd className="display mt-1 font-serif text-xl text-fg md:text-2xl">
+                          {m.metric}
+                        </dd>
+                      </div>
                     ))}
-                  </ul>
+                  </dl>
 
-                  <a href={project.link} target="_blank" rel="noopener noreferrer">
-                    <button className="bg-white text-gray-950 h-12 w-full md:w-auto px-6 rounded-xl font-semibold inline-flex items-center justify-center gap-2 mt-8 hover:bg-gray-100 transition-colors duration-200">
-                      {project.isGithub ? (
-                        <>
-                          <GithubIcon className="size-4" />
-                          <span>View Code</span>
-                        </>
-                      ) : (
-                        <>
-                          <span>Visit Live Site</span>
-                          <ArrowUpRightIcon className="size-4" />
-                        </>
-                      )}
-                    </button>
-                  </a>
-                </div>
+                  <div className="mt-5 text-xs text-muted">
+                    {p.stack.join("  ·  ")}
+                  </div>
 
-                <div className="relative">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    className="mt-8 -mb-4 md:-mb-0 lg:mt-0 lg:absolute lg:h-full lg:w-auto lg:max-w-none"
-                  />
+                  <div className="mt-7">
+                    <Link
+                      href={`/work/${p.slug}`}
+                      className="group/cta inline-flex h-10 items-center text-sm font-medium text-fg"
+                    >
+                      Read case study
+                      <span className="ml-2 inline-block h-px w-6 bg-fg/60 transition-all group-hover/cta:w-10 group-hover/cta:bg-fg" />
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            </Card>
+              </article>
+            </Reveal>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );
