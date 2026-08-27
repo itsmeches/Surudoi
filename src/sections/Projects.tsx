@@ -102,7 +102,7 @@ export const ProjectsSection = () => {
   const minor = projects.filter((p) => !findStudy(p.slug)?.flagship);
 
   return (
-    <section id="log" className="relative isolate border-b hairline py-24 md:py-32">
+    <section id="log" className="relative isolate border-b hairline scroll-mt-20 py-20 md:py-28 min-h-[calc(100vh-4rem)] flex flex-col justify-center">
       <div className="container">
         <SectionHeader
           index="01"
@@ -122,7 +122,7 @@ export const ProjectsSection = () => {
                     <Link
                       href={`/work/${p.slug}`}
                       aria-label={`Open ${p.title} case study`}
-                      className={`group relative block aspect-[16/11] overflow-hidden border-line/70 lg:col-span-5 lg:aspect-auto ${
+                      className={`group relative block aspect-[16/10] overflow-hidden bg-subtle/80 border-line/70 lg:col-span-5 lg:aspect-[4/3] ${
                         i % 2 === 1 ? "lg:order-2 lg:border-l" : "lg:border-r"
                       }`}
                     >
@@ -130,8 +130,9 @@ export const ProjectsSection = () => {
                         src={p.image}
                         alt={p.imageAlt}
                         fill
+                        quality={90}
                         sizes="(min-width: 1024px) 480px, 100vw"
-                        className="object-cover grayscale-[15%] transition-[filter] duration-300 group-hover:grayscale-0"
+                        className="object-cover object-top grayscale-[15%] transition-[filter,transform] duration-300 group-hover:grayscale-0 group-hover:scale-[1.02]"
                       />
                       {p.imageBadge && (
                         <div className="pointer-events-none absolute right-3 top-3">

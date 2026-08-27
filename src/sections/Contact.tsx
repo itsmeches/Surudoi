@@ -25,7 +25,7 @@ export const ContactSection = () => {
   return (
     <section
       id="contacts"
-      className="relative isolate py-24 md:py-32"
+      className="relative isolate scroll-mt-20 py-20 md:py-28 min-h-[calc(100vh-4rem)] flex flex-col justify-center"
     >
       <div className="container max-w-3xl">
         <SectionHeader

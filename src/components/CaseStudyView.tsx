@@ -46,8 +46,9 @@ export const CaseStudyView = ({ study }: { study: CaseStudy }) => {
             alt={study.hero.alt}
             fill
             priority
+            quality={90}
             sizes="(min-width: 1024px) 960px, 100vw"
-            className="object-cover"
+            className="object-cover object-top"
           />
         </div>
 

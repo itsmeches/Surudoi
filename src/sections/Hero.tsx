@@ -13,7 +13,7 @@ export const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative isolate border-b hairline pt-32 pb-20 md:pt-40 md:pb-28"
+      className="relative isolate border-b hairline min-h-[calc(100vh-4rem)] flex flex-col justify-center py-20 md:py-24 scroll-mt-16"
     >
       <div className="container">
         <div className="mb-10 flex items-center gap-3 eyebrow">
@@ -22,9 +22,9 @@ export const HeroSection = () => {
           <span>Field notes — Lipa City, PH · GMT+8</span>
         </div>
 
-        <div className="grid gap-14 lg:grid-cols-12 lg:items-end">
+        <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
           {/* LEFT — positioning */}
-          <div className="flex flex-col gap-8 lg:col-span-8">
+          <div className="flex flex-col gap-7 lg:col-span-7">
             <h1 className="display font-serif text-balance text-[2.35rem] leading-[1.08] sm:text-[3rem] md:text-[3.6rem] tracking-[-0.015em] max-w-[16ch]">
               A working record of research, engineering, and leadership.
             </h1>
@@ -95,7 +95,7 @@ export const HeroSection = () => {
           </div>
 
           {/* RIGHT — credibility ledger */}
-          <aside className="lg:col-span-4">
+          <aside className="lg:col-span-5 lg:sticky lg:top-24">
             <div className="surface p-6">
               <div className="flex items-center gap-3">
                 <div className="relative h-11 w-11 flex-shrink-0 overflow-hidden border border-line/70">

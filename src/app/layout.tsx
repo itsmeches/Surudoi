@@ -5,6 +5,7 @@ import { ScrollProgress } from "@/components/ScrollProgress";
 import { RouteFade } from "@/components/RouteFade";
 import { Preloader } from "@/components/Preloader";
 import { ChatWidget } from "@/components/ChatWidget";
+import { PrecisionCursor } from "@/components/PrecisionCursor";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -61,6 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <Preloader />
+        <PrecisionCursor />
         <ScrollProgress />
         <RouteFade>{children}</RouteFade>
         <ChatWidget />
