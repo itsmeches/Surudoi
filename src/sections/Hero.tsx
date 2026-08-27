@@ -13,18 +13,18 @@ export const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative isolate border-b hairline min-h-[calc(100vh-4rem)] flex flex-col justify-center py-20 md:py-24 scroll-mt-16"
+      className="relative isolate border-b hairline pt-24 pb-12 md:pt-28 md:pb-16 scroll-mt-16"
     >
       <div className="container">
-        <div className="mb-10 flex items-center gap-3 eyebrow">
+        <div className="mb-6 flex items-center gap-3 eyebrow">
           <span className="entry-index">ENTRY 00</span>
           <span className="h-px w-6 bg-line" />
           <span>Field notes — Lipa City, PH · GMT+8</span>
         </div>
 
-        <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
+        <div className="grid gap-8 lg:grid-cols-12 lg:items-start">
           {/* LEFT — positioning */}
-          <div className="flex flex-col gap-7 lg:col-span-7">
+          <div className="flex flex-col gap-6 lg:col-span-7">
             <h1 className="display font-serif text-balance text-[2.35rem] leading-[1.08] sm:text-[3rem] md:text-[3.6rem] tracking-[-0.015em] max-w-[16ch]">
               A working record of research, engineering, and leadership.
             </h1>
