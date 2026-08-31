@@ -28,7 +28,10 @@ const plexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Chester Andaya — Working Record",
   description:
     "Researcher, engineer, builder, leader. ICMCR 2026 (Tokyo) computer vision research, full-stack government systems, and ML products shipped end-to-end.",
@@ -37,6 +40,30 @@ export const metadata: Metadata = {
     description:
       "Researcher, engineer, builder, leader. ICMCR 2026 (Tokyo) computer vision research, full-stack government systems, and ML products shipped end-to-end.",
     type: "website",
+    url: SITE_URL,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Chester Andaya — Working Record",
+    description:
+      "Researcher, engineer, builder, leader. ICMCR 2026 (Tokyo) computer vision research, full-stack government systems, and ML products shipped end-to-end.",
+  },
+};
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Chester Andaya",
+  jobTitle: "Machine Learning Engineer",
+  url: SITE_URL,
+  email: "mailto:iamchesterandaya@gmail.com",
+  sameAs: [
+    "https://github.com/itsmeches",
+    "https://www.linkedin.com/in/chester-andaya-8bba4a1b9",
+  ],
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: "National University — Lipa",
   },
 };
 
@@ -47,6 +74,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${inter.variable} ${sourceSerif.variable} ${plexMono.variable}`}
     >
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html:

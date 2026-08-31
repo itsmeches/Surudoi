@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Reveal } from "@/components/Reveal";
 
@@ -200,7 +201,19 @@ export const ExperienceSection = () => {
                 NPK Deficiency Detection in Bitter Gourd Leaves Using ResNet50
                 CNN.
               </span>{" "}
-              International Conference on Machine Learning and Computer Research.
+              International Conference on Mechatronics, Control and Robotics.
+            </p>
+            <div className="mt-5 relative aspect-[4/3] overflow-hidden border border-line/60">
+              <Image
+                src="/Achievements/Tokyo.jpg"
+                alt="Chester Andaya presenting the NPK deficiency detection research at ICMCR 2026 in Tokyo, Japan"
+                fill
+                sizes="(min-width: 1024px) 480px, 100vw"
+                className="object-cover grayscale-[10%]"
+              />
+            </div>
+            <p className="mono mt-2 text-[11px] text-muted">
+              Presenting at ICMCR 2026 · Tokyo, March 2026
             </p>
           </Reveal>
         </div>

@@ -124,7 +124,7 @@ export const HeroSection = () => {
                   GitHub
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/chester-andaya-8bba4a1b9"
+                  href="https://www.linkedin.com/in/chester-andaya/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="link-underline text-muted hover:text-fg"

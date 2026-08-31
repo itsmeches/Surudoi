@@ -63,7 +63,7 @@ export const ContactSection = () => {
               {copied ? "Copied" : "Copy"}
             </button>
             <a
-              href="https://www.linkedin.com/in/chester-andaya-8bba4a1b9"
+              href="https://www.linkedin.com/in/chester-andaya/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-11 items-center border border-line/70 px-5 text-sm font-medium text-fg transition-colors hover:border-fg/50"

@@ -18,6 +18,9 @@ export const PrecisionCursor = () => {
     }
 
     setEnabled(true);
+    // Only hide the system cursor once the replacement is actually mounted —
+    // see the scoped `.custom-cursor` rule in globals.css.
+    document.documentElement.classList.add("custom-cursor");
 
     let rafId: number;
     let targetX = -100;
@@ -60,6 +63,7 @@ export const PrecisionCursor = () => {
       window.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseleave", onMouseLeave);
       cancelAnimationFrame(rafId);
+      document.documentElement.classList.remove("custom-cursor");
     };
   }, [isVisible]);
 

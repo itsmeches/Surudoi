@@ -126,7 +126,7 @@ export const ChatWidget = () => {
       messages.map((m) => {
         let text = extractText((m as { parts?: unknown }).parts);
         if (!text && typeof (m as { content?: unknown }).content === "string") {
-          text = (m as { content: string }).content;
+          text = (m as unknown as { content: string }).content;
         }
         return {
           id: m.id,
@@ -226,10 +226,7 @@ export const ChatWidget = () => {
             max-h-[min(620px,calc(100vh-7.5rem))]
             flex flex-col
             surface
-            rounded-2xl
-            backdrop-blur-xl
             overflow-hidden
-            shadow-[0_40px_90px_-30px_rgb(2_8_20/0.65)]
             motion-safe:animate-chrome-in
           "
         >

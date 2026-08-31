@@ -1,6 +1,6 @@
 const links = [
   { label: "GitHub", href: "https://github.com/itsmeches" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/chester-andaya-8bba4a1b9" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/chester-andaya/" },
   { label: "Email", href: "mailto:iamchesterandaya@gmail.com" },
 ];
 
