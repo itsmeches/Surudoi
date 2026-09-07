@@ -7,7 +7,7 @@ import { caseStudies } from "@/data/caseStudies";
 import Ampalaya from "@/assets/images/Ampalaya.png";
 import Smart from "@/assets/images/Smart Admission.png";
 import Coffee from "@/assets/images/Liberica.png";
-import Inventory from "@/assets/images/Inventory system.png";
+import Cris from "@/assets/images/Cris.png";
 
 type Project = {
   slug: string;
@@ -55,7 +55,7 @@ const projects: Project[] = [
       { metric: "Delivery", label: "feature shipping & debugging" },
     ],
     stack: ["React", "Laravel", "REST APIs", "SQL"],
-    image: Inventory,
+    image: Cris,
     imageAlt: "CRIS workflow and reporting module interface",
     imageBadge: "Internal product · illustrative preview",
   },
@@ -102,7 +102,7 @@ export const ProjectsSection = () => {
   const minor = projects.filter((p) => !findStudy(p.slug)?.flagship);
 
   return (
-    <section id="log" className="relative isolate border-b hairline scroll-mt-20 py-20 md:py-28 min-h-[calc(100vh-4rem)] flex flex-col justify-center">
+    <section id="log" className="relative isolate border-b hairline scroll-mt-20 py-20 md:py-28 min-h-screen-safe flex flex-col justify-center">
       <div className="container">
         <SectionHeader
           index="01"
@@ -173,11 +173,11 @@ export const ProjectsSection = () => {
                         {p.summary}
                       </p>
 
-                      <dl className="mt-6 grid grid-cols-3 gap-4 border-y border-line/60 py-5">
+                      <dl className="mt-6 grid grid-cols-3 gap-3 border-y border-line/60 py-5 sm:gap-4">
                         {p.impact.map((m) => (
                           <div key={m.label}>
                             <dt className="eyebrow">{m.label}</dt>
-                            <dd className="display mt-1 font-serif text-xl text-fg md:text-2xl">
+                            <dd className="display mt-1 break-words font-serif text-base text-fg sm:text-xl md:text-2xl">
                               {m.metric}
                             </dd>
                           </div>

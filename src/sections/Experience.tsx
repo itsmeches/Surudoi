@@ -114,7 +114,7 @@ const skillGroups = [
 
 export const ExperienceSection = () => {
   return (
-    <section id="experience" className="relative isolate border-b hairline scroll-mt-20 py-20 md:py-28 min-h-[calc(100vh-4rem)] flex flex-col justify-center">
+    <section id="experience" className="relative isolate border-b hairline scroll-mt-20 py-20 md:py-28 min-h-screen-safe flex flex-col justify-center">
       <div className="container">
         <SectionHeader
           index="02"

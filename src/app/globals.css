@@ -78,6 +78,15 @@
   .hairline    { border-color: rgb(var(--fg) / 0.1); }
   .ring-page   { --tw-ring-color: rgb(var(--bg)); }
 
+  /* Mobile-safe viewport height — accounts for the dynamic browser chrome
+     (address bar) on phones, where 100vh alone causes content to be cut
+     off or jump as the chrome shows/hides. Falls back to vh where dvh
+     isn't supported. */
+  .min-h-screen-safe {
+    min-height: calc(100vh - 4rem);
+    min-height: calc(100dvh - 4rem);
+  }
+
   /* Flat, bordered surface — no gradient sheen, no glow shadow. */
   .surface {
     background: rgb(var(--card));

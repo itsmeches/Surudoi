@@ -25,7 +25,7 @@ export const ContactSection = () => {
   return (
     <section
       id="contacts"
-      className="relative isolate scroll-mt-20 py-20 md:py-28 min-h-[calc(100vh-4rem)] flex flex-col justify-center"
+      className="relative isolate scroll-mt-20 py-20 md:py-28 min-h-screen-safe flex flex-col justify-center"
     >
       <div className="container max-w-3xl">
         <SectionHeader
@@ -40,7 +40,7 @@ export const ContactSection = () => {
             <div className="eyebrow">Email</div>
             <a
               href={mailto}
-              className="display mt-2 block font-serif text-2xl text-fg transition-colors hover:text-accent md:text-3xl"
+              className="display mt-2 block break-all font-serif text-xl text-fg transition-colors hover:text-accent sm:text-2xl md:text-3xl"
             >
               {email}
             </a>
