@@ -81,7 +81,15 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Conversation too long." }, { status: 413 });
   }
 
-  const modelMessages = await convertToModelMessages(messages);
+  const modelMessages = await convertToModelMessages(
+    // gpt-oss-20b rejects reasoning content resubmitted as input on later
+    // turns ("reasoning is not supported with this model") — only replay
+    // the visible text back to it, never the reasoning trace.
+    messages.map((m) => ({
+      ...m,
+      parts: m.parts.filter((p) => p.type !== "reasoning"),
+    }))
+  );
 
   const result = streamText({
     model: groq("openai/gpt-oss-20b"),
