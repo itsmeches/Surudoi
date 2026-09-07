@@ -27,8 +27,9 @@ import {
 
 const SUGGESTIONS = [
   "What's Chester's strongest project?",
-  "Is he available for engineering roles?",
+  "Has he worked on real production software?",
   "What ML stack does he use?",
+  "What makes him different from other graduates?",
 ];
 
 const extractText = (parts: unknown): string => {
@@ -287,8 +288,8 @@ export const ChatWidget = () => {
                 <div className="space-y-2">
                   <span className="eyebrow">Suggested</span>
                   <p className="text-[13.5px] leading-relaxed text-muted">
-                    Ask about Chester&apos;s projects, research, stack, or
-                    availability. For anything off-topic, email{" "}
+                    Start with his research, government engineering work, ML
+                    stack, or the way he builds. For opportunities, email{" "}
                     <a
                       href="mailto:iamchesterandaya@gmail.com"
                       className="text-fg link-underline"
