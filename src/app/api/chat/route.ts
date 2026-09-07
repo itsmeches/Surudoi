@@ -84,7 +84,7 @@ export async function POST(req: Request) {
   const modelMessages = await convertToModelMessages(messages);
 
   const result = streamText({
-    model: groq("groq/compound-mini"),
+    model: groq("openai/gpt-oss-20b"),
     system: PERSONA_SYSTEM_PROMPT,
     messages: modelMessages,
     temperature: 0.3,
